@@ -15,8 +15,8 @@ author :
   name : Andre Boechat
   email : boechat107@gmail.com
   github : boechat107
-#twitter : username
-#feedburner : feedname
+  twitter : username
+  feedburner : feedname
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt 
