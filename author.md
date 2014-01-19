@@ -7,7 +7,7 @@ description: "About me"
 
 <img src="/images/avatar5.jpg" width="150" align="right">
 
-Who am I?
+Who I am...
 
 * Simple and easygoing guy.
 * Passionate learner.
@@ -21,6 +21,8 @@ Now, professionally speaking...
 [Federal University of Espírito Santo](http://inf.ufes.br/).
 * Completed the Master's degree of Automation and Systems Engineering in the
 [Federal University of Santa Catarina](http://das.ufsc.br/).
+* Fascinated by machine learning.
+* Interested in working with smart and cooperative people.
 
 - - -
 
