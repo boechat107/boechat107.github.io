@@ -2,7 +2,7 @@
 layout: post
 title: "My Clojure programming environment"
 description: "What I use to code in Clojure using Vim."
-category: 
+category: Programming
 tags: [Clojure, Vim]
 ---
 {% include JB/setup %}
