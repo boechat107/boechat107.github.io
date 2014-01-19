@@ -9,7 +9,7 @@ tags: [Leinigen, Clojure]
 
 Problem concerning the copy of a resource file.
 
-``` clojure
+{% highlight clojure %}
 (:require
     [clojure.java.io :as io])
 (:import 
@@ -23,4 +23,4 @@ Problem concerning the copy of a resource file.
         out-path (s/replace fpath #"\.\w+$" ".xls")] 
     (FileUtils/copyURLToFile template (io/file out-path))
     out-path))
-```
+{% endhighlight %}
