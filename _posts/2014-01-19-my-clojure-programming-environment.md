@@ -20,3 +20,10 @@ functionality of Slimv.
 * [rainbow_parentheses](https://github.com/kien/rainbow_parentheses.vim)
 * [redl](https://github.com/dgrnbrg/redl) and its dependencies, which gives us a
 real REPL.
+
+*Update:*
+
+Recently I needed to use Common Lisp for a task and I found that Slimv works almost
+perfectly! So, I just removed the paredit and rainbow plugins, since Slimv has them
+as built-in features, and kept Slimv working with Fireplace and redl.
+
