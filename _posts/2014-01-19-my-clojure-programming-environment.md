@@ -27,3 +27,7 @@ Recently I needed to use Common Lisp for a task and I found that Slimv works alm
 perfectly! So, I just removed the paredit and rainbow plugins, since Slimv has them
 as built-in features, and kept Slimv working with Fireplace and redl.
 
+Additional plugins:
+
+* [cljfold](https://github.com/gberenfield/cljfold.vim), for automatic code folding.
+
