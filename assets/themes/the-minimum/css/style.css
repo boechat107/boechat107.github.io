@@ -850,3 +850,14 @@ pre {
     margin-right: 360px;
   }
 }
+
+figcaption {
+    padding: 0.1em;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+figcaption::before {
+    content: "Figure " counter(image) " ";
+    counter-increment: image;
+}
