@@ -104,7 +104,7 @@ tree favors searches involving multidimensional search keys, like the coordinate
 and $y$ in a 2D space. So, an insertion of a vertex by its coordinates can be done
 in $O(\log n)$ too.
 
-<img alt="Kd-tree" src="http://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Kdtree_2d.svg/500px-Kdtree_2d.svg.png" width="400">
+{% include image.html url="http://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Kdtree_2d.svg/500px-Kdtree_2d.svg.png" description="Visual representation of a Kd-tree structure." width="400" %}
 
 Like the first implementation, the main loop of the algorithm is executed until
 we don't have any remaining free vertex. The efficiency difference comes from 
