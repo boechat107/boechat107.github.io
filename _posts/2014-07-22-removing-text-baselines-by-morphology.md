@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Removing text baselines by morphology"
+title: "Removing text baselines by morphological operations"
 description: "Using mathematical morphology (erode/dilation) to remove text baselines"
 category: Research Problems
 tags: [Image Processing, OCR]
