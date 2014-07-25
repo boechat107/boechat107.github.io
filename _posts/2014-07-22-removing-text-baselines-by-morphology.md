@@ -3,6 +3,8 @@ layout: post
 title: "Removing text baselines by morphological operations"
 description: "Using mathematical morphology (erode/dilation) to remove text baselines"
 category: Research Problems
+lang:
+trans: 
 tags: [Image Processing, OCR]
 ---
 {% include JB/setup %}
@@ -27,7 +29,7 @@ Let's test it using small scripts in [Octave](http://www.gnu.org/software/octave
 {% highlight matlab%}
 img = imread('handwritten1.jpg' );
 gray = rgb2gray(img);
-h_gray = baselin_removal(gray, 30, 3);
+h_gray = baseline_removal(gray, 30, 3);
 imshow(h_gray)
 subplot(1,2,1), imshow(gray)
 subplot(1,2,2), imshow(h_gray)
