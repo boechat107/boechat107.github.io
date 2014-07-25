@@ -5,6 +5,26 @@
 				<div class="unit-head">
 					<div class="unit-inner unit-head-inner">
 						<h1 class="h2 entry-title">{{ page.title }}</h1>
+                        <div class="unit-head-inner lang">
+                            <!-- Possible post translations -->
+                            {% if page.lang %}
+                              {% if page.lang == 'en' %}
+                                <span class="lang-active">en</span> |
+                                {% if page.trans %}
+                                  <a class="lang-inactive" href="{{ page.trans }}">pt-br</a> 
+                                {% else %}
+                                  <span class="lang-noexist">pt-br</span>
+                                {% endif %}
+                              {% else %}
+                                {% if page.trans %}
+                                  <a class="lang-inactive" href="{{ page.trans }}">en</a>
+                                {% else %}
+                                  <span class="lang-noexist">en</span>
+                                {% endif %}
+                                | <span class="lang-active">pt-br</span>
+                              {% endif %}
+                            {% endif %}
+                        </div>
 					</div><!-- unit-inner -->
 				</div><!-- unit-head -->
 			</header>
@@ -12,9 +32,10 @@
 			<div class="bd">
 				<div class="entry-content">
                     {{ content }}
-                    <hr><hr>
+                    <hr>
                     <div class="meta">
                         Do you wanna tell me something? Please, send me an email! =)
+                        <br><br>
 						<p class="date-publish">
 							Published: 
 							<date class="date-pub" title="{{ page.date | date_to_xmlschema }}" datetime="{{ page.date | date_to_xmlschema }}" pubdate>
@@ -24,12 +45,12 @@
 							</date>
 						</p>
 						<ul class="list-category list-linear">
-							<li class="list-head">category: </li>
+							<li class="list-head">category:&nbsp</li>
 							{% assign categories_list = page.categories %}
 							{% include JB/categories_list %}
 						</ul>
 						<ul class="list-tag list-linear">
-							<li class="list-head">tags: </li>
+							<li class="list-head">tags:&nbsp</li>
 							{% assign tags_list = page.tags %}
 							{% include JB/tags_list %}
 						</ul>
