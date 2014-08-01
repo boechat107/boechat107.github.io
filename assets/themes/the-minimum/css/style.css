@@ -192,6 +192,20 @@ a:hover {
   color: #474747;
   text-decoration: none;
 }
+/* INDEX PAGE */
+.row {
+  padding: 10px 10px 10px 10px;
+  background-color: #F3F3F3;
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.6);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.row h3{
+  font-size: 26px;
+  line-height: 36px; 
+}
 /* HIGHLIGHTER */
 pre {
   margin-bottom: 1.625em;
