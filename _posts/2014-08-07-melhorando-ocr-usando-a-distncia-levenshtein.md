@@ -65,3 +65,30 @@ implementação, que utilizei no seguinte código:
   {:pre [(string? target)]}
   (apply min-key (partial levenshtein-distance target) dic))
 {% endhighlight %}
+
+A função `levenshtein-similar` apenas calcula a distância Levenshtein entre 
+a palavra a ser corrigida e cada uma do dicionário dado (sequência de palavras),
+retornando aquela que tenha gerado a menor distância.
+
+Podemos agora testar a ideia com os exemplos dados anteriormente:
+
+{% highlight clojure %}
+=> (levenshtein-similar "2509" (map str (range 1998 2015)))
+2009
+=> (levenshtein-similar "0012" (map str (range 1998 2015)))
+2012
+=> (levenshtein-similar "2097" (map str (range 1998 2015)))
+2007
+{% endhighlight %}
+
+No meu caso foi fácil assumir um pequeno dicionário de datas. Usei aquele pequeno 
+trecho de código no meu programa e a acurácia do OCR foi melhorada 
+consideravelmente para o meu conjunto de imagens de teste.
+
+## Conclusão
+
+Sei que a solução implementada está longe de ser a melhor. Entretanto, a ideia 
+me economizou tempo e me ajudou a abrir a cabeça para outros possíveis 
+*approaches* para incrementar o meu sistema de OCR.
+Talvez eu até consiga usar ideias similares para outros campos dos documentos
+onde a possibilidade de palavras é pequena.

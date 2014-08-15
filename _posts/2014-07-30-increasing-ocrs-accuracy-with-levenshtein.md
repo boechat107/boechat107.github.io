@@ -5,8 +5,8 @@ description: "Using the Levenshtein distance to increase the OCR's accuracy"
 category: programming
 tags: [Image Processing, OCR, Spell Checking]
 mathjax: 
-lang: 
-trans: 
+lang: en
+trans: /melhorando-ocr-usando-a-distncia-levenshtein/
 ---
 {% include JB/setup %}
 
