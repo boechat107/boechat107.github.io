@@ -248,6 +248,9 @@ pre {
 }
 /* MAIN
 --------------------------------------------------------------------------------- */
+.unit-article {
+    counter-reset: image;
+}
 .unit-article header {
   background: url('/assets/themes/the-minimum/skin/100-90-5-monochrome.png');
   background-repeat: repeat;
@@ -887,9 +890,9 @@ figcaption {
     padding: 0.1em;
     font-size: 0.9em;
     text-align: center;
+    counter-increment: image;
 }
 
 figcaption::before {
     content: "Figure " counter(image) " ";
-    counter-increment: image;
 }
