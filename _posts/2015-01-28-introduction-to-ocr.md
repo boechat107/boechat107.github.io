@@ -2,7 +2,7 @@
 layout: post
 title: "Reading text from images"
 description: "Gentle introduction to Optical Character Recognition (OCR)"
-category: programming
+category: Machine Learning
 tags: [image processing, OCR]
 mathjax: true
 lang: 
