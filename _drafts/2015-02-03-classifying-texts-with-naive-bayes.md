@@ -134,12 +134,12 @@ $$
 \end{equation}
 $$
 
-we need to calculate the frequency of the document classes $P(c)$ from our documents
+we need to calculate the frequency of the document classes $\hat{P}(c)$ from our documents
 database.
 One simple and intuitive way to do this is 
 
 $$
-P(c) = \frac{N_c}{N}
+\hat{P}(c) = \frac{N_c}{N}
 $$
 
 where $N_c$ is the number of documents in the class $c$ and $N$ is the total number 
@@ -153,7 +153,8 @@ The approach can be very similar to the classes' frequency:
 
 $$
 \begin{equation}
-P(x_i|c) = \frac{N_{x_i, \, c}}{N_{x, \, c}}
+\hat{P}(x_i|c) = \frac{N_{x_i, \, c}}{\sum\limits_{j=1}^n N_{x_j, \, c}}
+\label{term0}
 \end{equation}
 $$
 
@@ -171,9 +172,35 @@ Now, suppose that in our documents database there is no occurrence of the word
 What happens with our classifier when it faces a new text containing the word 
 "cancer"? 
 
-As we can see in equation \eqref{target}, the probability the document above 
-being in the class soccer is zero because $$P(\mbox{cancer}\,|\,\mbox{soccer})=0$$,
-even if the document is clearly a text about soccer.
+As we can see in equation \eqref{target}, we would have a multiplication involving
+$$\hat{P}(\mbox{cancer}\,|\,\mbox{soccer})=0$$, which makes the probability of the
+document above being in the class soccer equals to zero, even if the document
+is clearly a text about soccer. This seems to be called *sparseness*: the
+training dataset is never big enough to include rare events.
+
+To solve this problem, we can use *add-one* smoothing, which is to assume that each
+word occurs at least once for each class. This idea can be translated in a modification
+of equation \eqref{term0}:
+
+$$
+\begin{equation}
+\hat{P}(x_i|c) = \frac{N_{x_i, \, c} + 1}{\sum\limits_{j=1}^n N_{x_j, \, c} + n}
+\end{equation}
+$$
+
+Now we have all elements to calculate the results of equation \eqref{target}
+and to train a classifier model from a document database.
+
+## Common practices
+
+### Bernoulli model 
+
+### Log probabilities
+
+### Preprocessing
+
+## Some libraries 
+
 
 ## References
 
