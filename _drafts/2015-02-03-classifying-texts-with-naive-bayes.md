@@ -67,7 +67,10 @@ database. In the end, we will take the class with the highest probability,
 or:
 
 $$
+\begin{equation}
 c_{\mbox{answer}} = \arg \max_{c \in \mathbb{C}} P(c|d)
+\label{answer}
+\end{equation}
 $$
 
 ## Mathematical formulation 
@@ -185,6 +188,7 @@ of equation \eqref{term0}:
 $$
 \begin{equation}
 \hat{P}(x_i|c) = \frac{N_{x_i, \, c} + 1}{\sum\limits_{j=1}^n N_{x_j, \, c} + n}
+\label{term1}
 \end{equation}
 $$
 
@@ -195,11 +199,54 @@ and to train a classifier model from a document database.
 
 ### Bernoulli model 
 
+It's very common to see applications of Naive Bayes using a different way to build the model.
+The formulation presented above is called *multinomial* model, where all occurrences of a 
+term in a document are considered.
+In a Bernoulli model, a term is considered only as present or absent in a document, 0 or 1.
+Therefore, the calculation of $\hat{P}(x_i|c)$ needs to be changed to
+
+$$
+\begin{equation}
+\hat{P}(x_i|c) = \frac{N_{x_i, \, c} + 1}{N_c + 2}
+\label{bterm}
+\end{equation}
+$$
+
+In this equation, $N_c$ continues to be the number of documents in class $c$, but 
+$N_{x_i, \, c}$ now is the number of documents that contains the term $x_i$.
+The number 2 at the denominator comes from the add-one smoothing and the fact
+the each term can assume only two values: presence or absence.
+
+An important thing to note is that nonoccurring terms don't affect the classification
+decision in multinomial models, but Bernoulli models model absences explicitly, using 
+them when computing $P(c|d)$.
+One consequence is that usually Bernoulli models make many mistakes when classifying 
+long documents.
+
 ### Log probabilities
+
+As many conditional probabilities are multiplied in equation \eqref{target}, it's 
+reasonable to expect some problems with floating point underflow (very very small 
+numbers to be represented by the computer).
+A common way to solve this problem is by applying logarithms, changing the equations 
+\eqref{answer} and \eqref{target} into 
+
+$$
+\begin{align}
+c_{\mbox{answer}} &= \arg \max_{c \in \mathbb{C}} \log \hat{P}(c|d) \nonumber\\
+    &= \arg \max_{c \in \mathbb{C}} \left[ \log \hat{P}(c) + 
+        \sum_{i=1}^n \log \hat{P}(x_i|c) \right]\\
+\end{align}
+$$
+
+Logarithms are usually a good choice because of their multiplication rule and 
+monotonicity.
 
 ### Preprocessing
 
-## Some libraries 
+## Some libraries
+
+Docker scientific-python
 
 
 ## References
