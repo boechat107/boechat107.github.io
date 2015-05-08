@@ -27,14 +27,6 @@ mathematical formulation. Then, I present a simple example of usage of this
 classifier using a Python library,
 [TextBlob](https://textblob.readthedocs.org/en/latest/#).
 
-* The necessity of having manually labeled texts (in this case, it was done by 
-the people involved).
-* Non-mathematical idea of the algorithm, basic assumptions (naive), explanation
-of the equation 13.4.
-* Mathematical formulation.
-* Python libraries
-* Code example
-
 ## Naive Bayes Intuition
 
 Our main objective here is to classify a text into different categories 
@@ -244,10 +236,55 @@ monotonicity.
 
 ### Preprocessing
 
+Usually the preprocessing step includes [stemming](http://en.wikipedia.org/wiki/Stemming)
+(to reduce inflected words to their word stem or root form) and feature selection
+(to select a subset of terms of the training set).
+The purpose is to train and classify documents more efficiently by reducing the 
+vocabulary and to avoid noise features and overfitting.
+Smaller the training data, more important is the preprocessing step.
+
+There are many algorithms for stemming and feature selection, but my most seen are:
+
+* Stemming 
+    * [Porter Stemming](http://tartarus.org/~martin/PorterStemmer/)
+* Feature selection 
+    * frequency based 
+    * $\chi^2$
+
+More details can be found in Manning's book (look at References section).
+
 ## Some libraries
 
-Docker scientific-python
+I have seen a lot of libraries over the web, but the most complete seems to be written 
+in Python.
+The most famous is [NLTK](http://www.nltk.org/), which can be learned with the book 
+[*Natural Language Processing with Python*](http://www.nltk.org/book/).
+An alternative for Java programmers is [Apache OpenNLP](http://opennlp.apache.org/),
+which is capable to support the most common NLP tasks but doesn't have some many 
+algorithms as NLTK.
+More references of books and libraries can be found 
+[here](http://textprocessing.org/tag/opennlp).
 
+In addition, I always like to suggest to look for 
+[Docker images](https://registry.hub.docker.com/) before trying to install libraries
+and dependencies by yourself.
+Images like [ipython/scipystack](https://registry.hub.docker.com/u/ipython/scipystack/)
+comes with the most common scientific Python packages 
+(NLTK is missing, but it can easily solved by this 
+ [Dockerfile](https://github.com/boechat107/naive_bayes_tests/blob/master/Dockerfile)).
+
+## Conclusion
+
+In this post is presented a common problem of document classification and a possible
+approach to solve it by using Naive Bayes models.
+An informal and a more theoretical descriptions of the technique were given.
+In addition, some common practices and programming libraries were cited.
+
+Many day-by-day problems are composed of repetitive (bothering) tasks, like
+classifying documents by their content.
+Fortunately, many of them can be easily and satisfactorily solved by computers and 
+machine learning techniques, without one being necessarily an expert in any related 
+subject.
 
 ## References
 
@@ -255,3 +292,4 @@ Docker scientific-python
 [*Introduction to Information Retrieval*](http://nlp.stanford.edu/IR-book/).
 Cambridge University Press, New York, NY, USA. 
 * [http://en.wikipedia.org/wiki/Naive_Bayes_classifier](http://en.wikipedia.org/wiki/Naive_Bayes_classifier)
+* [Text Processing – Getting Started with Text Processing](http://textprocessing.org/tag/opennlp)
