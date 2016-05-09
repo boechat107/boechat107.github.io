@@ -86,9 +86,10 @@ data = (sc.textFile('data/students_scores_samples.txt')
         ## Breaking lines into fields.
         .map(lambda line: line.split(','))
         ## Creating objects of different types.
-        .map(lambda (date, student_id, score): (dt.datetime.strptime(date, '%Y-%m-%d'),
-                                                student_id,
-                                                float(score)))
+        .map((lambda (date, student_id, score): 
+             (dt.datetime.strptime(date, '%Y-%m-%d'), 
+             student_id, 
+             float(score))))
         )
 ```
 
@@ -112,7 +113,7 @@ plt.figure(figsize=fsize)
 plt.scatter(x=x, y=y, s=50, c=colors, cmap='brg')
 ```
 
-![scatter plot](https://github.com/boechat/boechat107.github.io/blob/master/posts_attachments/spark_example_scatter_plot.png)
+![scatter plot](https://raw.githubusercontent.com/boechat107/boechat107.github.io/master/posts_attachments/spark_example_scatter_plot.png)
 
 Note that we called now the action `collect()` to be able to work with Matplotlib
 with normal Python lists. This action is executed three times, causing our previous
