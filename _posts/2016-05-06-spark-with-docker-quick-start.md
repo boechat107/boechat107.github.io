@@ -14,21 +14,24 @@ Would you like to quickly start testing some code using
 [Spark](http://spark.apache.org/)? Perhaps this post can help you to achieve this
 task with the smallest effort to install all the necessary requirements for a single
 machine. The most time spending requirement here (that doesn't really take much time
-or effort) is to install Docker [LINK].
+or effort) is to install [Docker](https://www.docker.com/) 
+([installation docs](https://docs.docker.com/engine/installation/linux/ubuntulinux/)).
 
-If you don't know what is Docker, you could imagine it as an engine that allows you
+If you don't know what Docker is, you could imagine it as an engine that allows you
 to create and run very light virtual machines. With Docker installed and running, we
-can run a "virtual machine" (a container, an instance of a Docker image) with Apache
-Spark installed and configured.
+can easily run a "virtual machine" (a container, an instance of a Docker image) with
+Apache Spark installed and configured.
 
 One Docker image I strongly suggest is
 [jupyter/all-spark-notebook](https://github.com/jupyter/docker-stacks/tree/master/all-spark-notebook).
-This image includes a Jupyter Notebook with support to many multiple languages, like
-Python, Scala and R. In the case of Python, for example, it also includes some 
+This image includes a Jupyter Notebook with support to multiple languages, like
+Python, Scala and R. In the case of Python, for example, it also includes some
 popular libraries for data science, like Scikit-learn and Pandas.
 
+## Running a container
+
 Let's run a container of the image above with the following command in a terminal
-(depending on your installation, super user permissions will be required):
+(depending on your installation, super user permissions might be required):
 
 ```sh
 docker run -d --name spark-notebook \ 
@@ -36,7 +39,7 @@ docker run -d --name spark-notebook \
     jupyter/all-spark-notebook
 ```
 
-This command launches a container with a Jupyter notebook to accessed by the port
+This command launches a container with a Jupyter notebook accessible by the port
 8888 and mounts the current directory (note `$PWD`) onto `/home/jovyan/work/data` 
 inside the container. All files inside the current directory will be available for
 your notebooks. Access `localhost:8888` with your browser to check if Jupyter is
@@ -65,8 +68,8 @@ plt.style.use('ggplot')
 fsize = (12,8)
 ```
 
-The next codes assumes we have a file `students_scores_samples.txt` inside the `data`
-directory. Each line of this file should represent a record of a student exam and is
+The next codes assume we have a file `students_scores_samples.txt` inside the `data`
+directory. Each line of this file represents a record of a student exam and is
 composed of a date, an ID and a score. The first two lines of the file look like
 this:
 
@@ -92,8 +95,8 @@ data = (sc.textFile('data/students_scores_samples.txt')
 Now we have a "potential" list of tuples composed of a `datetime.datetime`, a string
 and a float number. By "potential" I mean that we didn't really processed the file
 yet, we just created a kind of "recipe" (or a sequence of *transformations*) to be
-executed by Spark when an *action* is specified. Try to call the action `collect()`
-from the our object `data`.
+executed by Spark when an *action* is taken. Try to call the action `collect()`
+from the our object `data`, for instance.
 
 To make things a bit more visual, let's plot our parsed data as a scatter plot.
 
@@ -122,7 +125,7 @@ transformations.
 Spark SQL and DataFrames is a very interesting submodule to manipulate data as
 tables, including an API to execute queries using SQL.
 
-From our previous example, we could create a DataFrame by given `data` (a RDD) and a
+From our previous example, we could create a DataFrame by giving `data` (a RDD) and a
 list of column names:
 
 ```python
@@ -184,7 +187,7 @@ import pyspark.sql.functions as sqlfn
 ```
 
 It's important to mention that DataFrame's API is richer than it looks like and the
-code above could be written in many different ways. It's
+code above could be written in many different ways. Its
 [documentation](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html) is
 usually well enough described to help us explore the different possibilities.
 
@@ -195,8 +198,8 @@ Spark by using Docker to simplify its installation. Of course that, although the
 given example can help to understand the basics of Spark, we would need much more
 data to really perceive any of Spark's performance features for that code.
 
-Finally, if you are a Vim user and want to run Spark connected to a database (hum?
-what is the connection between these two things?), consider checking the Dockerfile
+Finally, if you are a Vim user and want to run Spark connected to a database,
+consider checking the Dockerfile
 of [boechat107/ext-spark-notebook](https://github.com/boechat107/ext-spark-notebook).
 
 PS.: You can download the 
