@@ -8,8 +8,6 @@ permalink: /author/
 
 <img src="/images/avatar5.jpg" width="150" align="right">
 
-I'm a computer engineer and a curious guy.
-
 Interests (without a specific order):
 
 * Machine learning, image processing, functional programming
