@@ -2,6 +2,7 @@
 layout: page
 title: "About me"
 description: "About me"
+permalink: /author/
 ---
 {% include JB/setup %}
 

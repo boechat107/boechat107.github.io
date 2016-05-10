@@ -3,6 +3,7 @@ layout: page
 title : Blog archive
 header : Blog list
 group: navigation
+permalink: /blog/
 ---
 {% include JB/setup %}
 
