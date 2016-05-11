@@ -17,6 +17,12 @@ Interests (without a specific order):
 * Open-source projects (collaborative work)
 * Libertarianism 
 
+Some other public information:
+
+* [Github repositories](https://github.com/boechat107)
+* [Gists](https://gist.github.com/boechat107)
+* [List of books](http://www.goodreads.com/boechat107) I'm reading or that I have
+read.
 
 - - -
 
