@@ -53,10 +53,87 @@ the engine that drives us to play with something without *thinking*. The L-mode,
 in addition to be responsible for the speech, is the part more familiar to us,
 it is the part where our conscious thoughts happen.
 
-**Bugs**
+### Brain's Bugs
+
+Again, much of the content is very related to *Subliminal*, specially when the
+author talks about memory. It seems that the brain usually only store some key
+facts about a moment and then, when we try to remember that, it kind of rebuilds
+the whole situation. Sometimes the process is almost perfect (specially if we
+keep remembering it over and over); sometimes the brain makes huge mistakes. For
+me, this phenomenon looks like an image compression algorithm; it makes the
+storage and information recovery easier and faster, but "small" errors are
+always inserted. Another useful analogy cited in the book is that "every read
+is a write".
+
+The memory is just one of the many *bugs* we have, like many different kind of
+biases (what is familiar is better; my side is good, your side is bad...).
+Although a little counterintuitive, they were crucial from the evolutionary
+perspective.
+
+It's always useful to keep the existence of these bugs in mind before engaging
+in a serious argumentation.
 
 ## Developing a New Skill
 
+There is no magic recipe, only hard work. However, this book is all about
+making the learning process more effective and less painful by given us
+*awareness*. The feeling of understanding is great, and understanding why the
+learning process is the way it is makes feel comfortable also, less anxious.
+
+Here are some key points that I'm trying to keep in mind now when starting to
+learn something new:
+
+* play with the matter, ask stupid questions, make mistakes (in a safe
+    environment)...
+* ... then step back, seat down and review what you have done analytically (what
+* usually people call "studying")
+* "write drunk, revise sober"
+* take notes (oh boy, this is important!), draw pictures, make diagrams
+* stablish objectives, **SMART** ones (specific, measurable, achievable,
+    relevant, time-boxed)
+* try to teach or explain the subject to someone
+* imagine how it would be when doing it like a pro (I heard that Michael Phelps
+    used to do something similar to improve his movements)
+* pay attention to what is happening, awareness is more important than
+    memorization
+* "pressure kills cognition", the *R-mode* doesn't handle time
+
 ## Keeping Focus
 
+I have seen many texts about "focus killers" and how bad they are when regarding
+productivity. The book gathers all that info in a single chapter and is great
+reference about the subject.
+
+One thing that I always observe on myself is the bad effects of multi-tasking.
+If someone keeps a conversation with me while I'm cooking, I always burn
+something. And what about an interruption when we are thinking on a recursive
+call of a function? We are not good at *context-switching*, it's said that it
+kills productivity and I agree with it.
+
+To minimize the effect of unavoidable interruptions, I learned long ago to make
+a note exactly about I was just doing before the interruption, like saving the
+local variables in a stack. It really helps! It becomes much easier to come back
+later and just continue where we were.
+
+Emails, news, IMs are very dangerous when done at the wrong moment. The author
+suggests interesting alternatives to relax, like looking at a blank paper
+instead of looking for news.
+Personally, I prefer to stare at something far from my window or, following
+another author's suggestion, I try to meditate for a few minutes.
+
+Another interesting thing that I already had noticed many times is the way some
+ideas come when we are stuck into a problem. We spend hours over it, thinking,
+trying, and the solution never comes. Then you are tired and need to take leak,
+drink a water  or simply starts to complain about the problem to someone else.
+Suddenly, like if a light coming directly from the sky, the solution comes clear
+to us! It was great to know that this is a serious stuff, that there are even
+models about this process.
+
 ## Conclusion
+
+*Pragmatic Thinking and Learning* is really a great book and I strongly suggest
+it to everyone, specially to software developers (because of the book's
+examples). It not only gives us some scientific foundations about human behavior
+but also many moments of fun while reading. It made me feel very capable of
+learning anything, preparing the mindset to bear the frustrations along the way
+and to be aware of common pitfalls.
