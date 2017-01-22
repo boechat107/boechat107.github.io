@@ -57,7 +57,7 @@ the engine that drives us to play with something without *thinking*. The L-mode,
 is the part more familiar to us, it is the part where our conscious thoughts
 happen, the *chatter* part.
 
-### Brain's Bugs
+### Brain Bugs
 
 Again, much of the content is very related to *Subliminal*, specially when the
 author talks about memory. It seems that the brain usually only store some key
