@@ -13,9 +13,9 @@ Interests (without a specific order):
 * Machine learning, image processing, functional programming
 * Sports like basketball and soccer
 * Good books and movies (I'm always open to good suggestions)
-* Making new friends (my email is at the page's end... =)
+* Making new friends (my email is at the bottom of the page :-)
 * Open-source projects (collaborative work)
-* Libertarianism 
+* Libertarianism
 
 Some other public information:
 
