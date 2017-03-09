@@ -10,7 +10,7 @@ trans:
 ---
 {% include JB/setup %}
 
-<img src="http://witzzer.com/wp-content/uploads/2016/09/10-things-only-really-stupid-people-will-understand.png" width="600">
+<img src="/images/jim-carrey-dumb-and-dumber-limo2.jpg" width="600">
 
 Everybody seems to have developed a mobile app in his life, so I always thought
 that mine was just a matter of time. Last week I finally decided to take this
