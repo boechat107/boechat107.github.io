@@ -2,8 +2,8 @@
 layout: post
 title: "Getting Started with Common Lisp"
 description: "A collection of information to getting started with Common Lisp"
-category:
-tags: []
+category: Programming
+tags: [Common-Lisp, Getting-Started]
 mathjax:
 lang:
 trans:
@@ -90,7 +90,7 @@ like this:
 After some years coding in Clojure, I got really used to the facilities provided
 by [Leiningen](https://leiningen.org/) and Maven; for CL, I was surprised that I
 couldn't easily find a way to start some serious, well organized project. In
-this post I try to organize all the information I gathered from many different
+this post I try to summarize all the information I gathered from many different
 sources just to start a new simple project.
 
 If you have some better suggestion, please send it to me by email. I would be
