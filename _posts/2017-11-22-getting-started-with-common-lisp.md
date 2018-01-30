@@ -102,3 +102,4 @@ really happy to learn something more.
 * [https://www.quicklisp.org/beta/](https://www.quicklisp.org/beta/)
 * [https://lispmethods.com/development-environment.html](https://lispmethods.com/development-environment.html)
 * [https://www.youtube.com/watch?v=SPgjgybGb5o](https://www.youtube.com/watch?v=SPgjgybGb5o)
+* [Common Lisp Cheat Sheet](https://www.cheatography.com/boechat107/cheat-sheets/common-lisp/)
