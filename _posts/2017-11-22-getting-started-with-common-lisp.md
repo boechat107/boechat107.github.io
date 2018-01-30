@@ -103,3 +103,4 @@ really happy to learn something more.
 * [https://lispmethods.com/development-environment.html](https://lispmethods.com/development-environment.html)
 * [https://www.youtube.com/watch?v=SPgjgybGb5o](https://www.youtube.com/watch?v=SPgjgybGb5o)
 * [Common Lisp Cheat Sheet](https://www.cheatography.com/boechat107/cheat-sheets/common-lisp/)
+* My Common Lisp [project template](https://github.com/boechat107/cl-project-template)
