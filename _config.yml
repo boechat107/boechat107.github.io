@@ -1,127 +1,112 @@
-# This is the default format.
-# For more see: https://github.com/mojombo/jekyll/wiki/Permalinks
-permalink: /:year-:month/:title/
-
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
-highlighter: 'rouge'
-
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
-#
-title : boechat107
-tagline: Site Tagline
-author :
-  name : Andre Boechat
-  email : boechat107@gmail.com
-  github : boechat107
-  twitter : username
-  feedburner : feedname
+title: &uname boechat107
+name: Andre Boechat
+email: &aemail boechat107@gmail.com
+description: >- # this means to ignore newlines until "baseurl:"
+    Blog from Andre Boechat including notes about software and some other stuff.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: &urlsite "https://boechat107.github.io"
+github_username: boechat107
+twitter_username: boechat107
 
-# The production_url is only used when full-domain names are needed
-# such as sitemap.txt
-# Most places will/should use BASE_PATH to make the urls
-#
-# If you have set a CNAME (pages.github.com) set your custom domain here.
-# Else if you are pushing to username.github.io, replace with your username.
-# Finally if you are pushing to a GitHub project page, include the project name at the end.
-#
-production_url : http://boechat107.github.io
+# Theme configuration:
+remote_theme: "mmistakes/minimal-mistakes"
+minimal_mistakes_skin: dirt
 
-# All Jekyll-Bootstrap specific configurations are namespaced into this hash
-#
-JB :
-  version : 0.3.0
+# Outputting
+permalink: /:year-:month/:title/
+paginate: 10 # amount of posts to show
+paginate_path: /page:num/
+timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-  # All links will be namespaced by BASE_PATH if defined.
-  # Links in your website should always be prefixed with {{BASE_PATH}}
-  # however this value will be dynamically changed depending on your deployment situation.
-  #
-  # CNAME (http://yourcustomdomain.com)
-  #   DO NOT SET BASE_PATH
-  #   (urls will be prefixed with "/" and work relatively)
-  #
-  # GitHub Pages (http://username.github.io)
-  #   DO NOT SET BASE_PATH
-  #   (urls will be prefixed with "/" and work relatively)
-  #
-  # GitHub Project Pages (http://username.github.io/project-name)
-  #
-  #   A GitHub Project site exists in the `gh-pages` branch of one of your repositories.
-  #  REQUIRED! Set BASE_PATH to: http://username.github.io/project-name
-  #
-  # CAUTION:
-  #   - When in Localhost, your site will run from root "/" regardless of BASE_PATH
-  #   - Only the following values are falsy: ["", null, false]
-  #   - When setting BASE_PATH it must be a valid url.
-  #     This means always setting the protocol (http|https) or prefixing with "/"
-  BASE_PATH : false
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+path: /tags/
 
-  # By default, the asset_path is automatically defined relative to BASE_PATH plus the enabled theme.
-  # ex: [BASE_PATH]/assets/themes/[THEME-NAME]
-  #
-  # Override this by defining an absolute path to assets here.
-  # ex:
-  #   http://s3.amazonaws.com/yoursite/themes/watermelon
-  #   /assets
-  #
-  ASSET_PATH : /assets/themes/the-minimum
+words_per_minute: 100
+search: true
 
-  # These paths are to the main pages Jekyll-Bootstrap ships with.
-  # Some JB helpers refer to these paths; change them here if needed.
-  #
-  archive_path: /blog.html
-  categories_path : /categories.html
-  tags_path : /tags.html
-  atom_path : /atom.xml
-  rss_path : /rss.xml
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: # true
+      share: true
+      related: true
 
-  # Settings for comments helper
-  # Set 'provider' to the comment provider you want to use.
-  # Set 'provider' to false to turn commenting off globally.
-  #
-  comments :
-    provider : false #disqus
-    disqus :
-      short_name : jekyllbootstrap
-    livefyre :
-      site_id : 123
-    intensedebate :
-      account : 123abc
-    facebook :
-      appid : 123
-      num_posts: 5
-      width: 580
-      colorscheme: light
 
-  # Settings for analytics helper
-  # Set 'provider' to the analytics provider you want to use.
-  # Set 'provider' to false to turn analytics off globally.
-  #
-  analytics :
-    provider : google
-    google :
-        tracking_id : 'UA-23191338-3'
-    getclicky :
-      site_id :
-    mixpanel :
-        token : '_MIXPANEL_TOKEN_'
+# Site Author
+author:
+  name             : "Andre Ambrosio Boechat"
+  avatar           : "/images/avatar5.jpg"
+  bio              : "Software engineer with experience in web services, machine learning and computer vision. I'm also becoming very good at changing diapers!"
+  location         : "Florianopolis, Brazil"
+  email            : *aemail
+  uri              : *urlsite
+  home             : # null (default), "absolute or relative url to link to author home"
+  bitbucket        :
+  github           : *uname
+  gitlab           :
+  linkedin         : *uname
+  stackoverflow    : "747872/boechat107"
+  twitter          : *uname
 
-  # Settings for sharing helper.
-  # Sharing is for things like tweet, plusone, like, reddit buttons etc.
-  # Set 'provider' to the sharing provider you want to use.
-  # Set 'provider' to false to turn sharing off globally.
-  #
-  sharing :
-    provider : false
+social:
+  type: # Person or Organization (defaults to Person)
+  name: # If the user or organization name differs from the site's name
+  links: # An array of links to social media profiles
+    - https://www.linkedin.com/in/boechat107/
+    - https://github.com/boechat107
+    - http://www.goodreads.com/boechat107
+    - https://twitter.com/boechat107
 
-  # Settings for all other include helpers can be defined by creating
-  # a hash with key named for the given helper. ex:
-  #
-  #   pages_list :
-  #     provider : "custom"
-  #
-  # Setting any helper's provider to 'custom' will bypass the helper code
-  # and include your custom code. Your custom file must be defined at:
-  #   ./_includes/custom/[HELPER]
-  # where [HELPER] is the name of the helper you are overriding.
+analytics:
+    provider: google
+    google:
+        tracking_id: 'UA-23191338-3'
 
+# Reading Files
+include:
+  - .htaccess
+  - images
+  - _pages
+exclude:
+  - Gemfile
+  - README
+keep_files:
+    - .git
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+
+# Markdown Processing
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+# Plugins (previously gems:)
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
