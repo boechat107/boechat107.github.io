@@ -18,7 +18,7 @@ minimal_mistakes_skin: dirt
 permalink: /:year-:month/:title/
 paginate: 10 # amount of posts to show
 paginate_path: /page:num/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: "America/Sao_Paulo" # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 category_archive:
   type: liquid
@@ -38,6 +38,7 @@ defaults:
       type: posts
     values:
       layout: single
+      toc: true
       author_profile: true
       read_time: true
       comments: # true
@@ -47,7 +48,7 @@ defaults:
 
 # Site Author
 author:
-  name             : "Andre Ambrosio Boechat"
+  name             : "Andre Boechat"
   avatar           : "/images/avatar5.jpg"
   bio              : "Software engineer with experience in web services, machine learning and computer vision. I'm also becoming very good at changing diapers!"
   location         : "Florianopolis, Brazil"
@@ -110,3 +111,8 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jemoji
+
+compress_html:
+  clippings: all
+  ignore:
+    envs: development  # disable compression in dev environment
