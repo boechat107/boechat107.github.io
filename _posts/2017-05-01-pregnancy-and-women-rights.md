@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Pregnancy and Women Rights"
 description: "Pregnancy, employment and women rights"
 category: Opinion
@@ -8,7 +8,7 @@ mathjax:
 lang:
 trans:
 ---
-{% include JB/setup %}
+
 
 **Husband:** Darling, I think you should tell your employer that you are
 pregnant. You should discuss with him some good arrangements for you both.

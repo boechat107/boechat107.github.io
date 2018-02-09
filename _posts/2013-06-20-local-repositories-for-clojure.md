@@ -1,11 +1,11 @@
 ---
-layout: post
+layout: single
 title: "Local repositories for Clojure"
 description: "How to set local repositories for Clojure projects."
 category: Programming
 tags: [Clojure, Leiningen]
 ---
-{% include JB/setup %}
+
 
 Local repositories are useful when you have some dependencies that are not in Maven
 or Clojars repositories. The following steps are one alternative to suppress this

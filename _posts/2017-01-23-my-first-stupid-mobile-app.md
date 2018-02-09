@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "My First Stupid Mobile App"
 description: "The first experience we never forget..."
 category: Programming
@@ -8,7 +8,7 @@ mathjax:
 lang:
 trans:
 ---
-{% include JB/setup %}
+
 
 <img src="/images/jim-carrey-dumb-and-dumber-limo2.jpg" width="600">
 

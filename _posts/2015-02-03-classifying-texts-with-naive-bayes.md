@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Classifying texts with Naive Bayes"
 description: "How to classify texts based on their words."
 category: Machine Learning
@@ -8,7 +8,7 @@ mathjax: true
 lang: 
 trans: 
 ---
-{% include JB/setup %}
+
 
 * toc
 {:toc}

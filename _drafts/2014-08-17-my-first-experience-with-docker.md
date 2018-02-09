@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "My first experience with Docker"
 description: "How I found my first useful application"
 category: programming
@@ -8,7 +8,7 @@ mathjax:
 lang: 
 trans: 
 ---
-{% include JB/setup %}
+
 
 Sacrificing accuracy for simplicity, I would say that [Docker](http://www.docker.com/)
 is a platform to run applications as virtual machines in a very lightweight way.

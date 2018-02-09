@@ -1,11 +1,11 @@
 ---
-layout: post
+layout: single
 title: "My Clojure programming environment"
 description: "What I use to code in Clojure using Vim."
 category: Programming
 tags: [Clojure, Vim]
 ---
-{% include JB/setup %}
+
 
 Until the last week, [Slimv](https://bitbucket.org/kovisoft/slimv) was my main tool to
 code in Clojure using Vim. Although Slimv is still a very nice plugin, it seems not 

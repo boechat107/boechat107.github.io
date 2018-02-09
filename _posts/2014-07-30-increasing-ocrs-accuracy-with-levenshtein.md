@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Increasing OCR's accuracy with the Levenshtein distance"
 description: "Using the Levenshtein distance to increase the OCR's accuracy"
 category: programming
@@ -8,7 +8,7 @@ mathjax:
 lang: en
 trans: /melhorando-ocr-usando-a-distncia-levenshtein/
 ---
-{% include JB/setup %}
+
 
 ## Problem
 

@@ -1,11 +1,11 @@
 ---
-layout: post
+layout: single
 title: "Leinigen resources and uberjar"
 description: "Problem concerning the copy of a resource file."
 category: Programming
 tags: [Leinigen, Clojure]
 ---
-{% include JB/setup %}
+
 
 Problem concerning the copy of a resource file.
 

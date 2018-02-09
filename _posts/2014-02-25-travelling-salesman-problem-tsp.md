@@ -1,17 +1,17 @@
 ---
-layout: post
+layout: single
 title: "Travelling Salesman Problem (TSP)"
 description: "A functional implementation to solve the problem of the shortest tour."
 category: Research Problems
 tags: [Haskell, Optimization]
 mathjax: true
 ---
-{% include JB/setup %}
+
 
 # Travelling Salesman Problem
 
 This post comes from a work done over an undergraduate course,
-[Programming Languages 2](http://www.inf.ufes.br/~raulh/), where the 
+[Programming Languages 2](http://www.inf.ufes.br/~raulh/), where the
 [*Travelling Salesman Problem*](http://en.wikipedia.org/wiki/Travelling_salesman_problem)
 was studied to analyse and apply different data structures, like binary tree variations.
 The implementations discussed below are found at
@@ -23,7 +23,7 @@ shortest possible tour, which should pass over each point just once and come bac
 the initial tour.
 
 <div style="display:inline-block;width:100%;">
-<img alt="Euclidean points" src="http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI1.gif" style="float:left;border:1px green solid" width="250"> 
+<img alt="Euclidean points" src="http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI1.gif" style="float:left;border:1px green solid" width="250">
 <img alt="TSP tour" src="http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI8.gif" style="float:right;border:1px green solid" width="250">
 </div>
 
@@ -48,27 +48,27 @@ shortest possible path.
 
 The distance between a free vertex and the tour is the distance between this vertex
 and the closest vertex of the tour.
-For this, an algorithm like 
+For this, an algorithm like
 [*Nearest Neighbor*](http://en.wikipedia.org/wiki/Nearest_neighbour_algorithm)
 can be used, selecting the free vertex whose distance from the tour is the greatest.
 
 Suppose $C$ as the distance between two vertexes, $i$ and $j$ as vertexes
 already in the tour and $r$ as the free vertex selected as pointed above. The
-vertex $r$ must be inserted in the tour obeying the follow equation 
+vertex $r$ must be inserted in the tour obeying the follow equation
 $$\min C_{ir} + C_{jr} - C_{ij}$$
 
 To understand better the problem and to compare the performance of different data
 structures for indexing (storage of the free vertexes) and the tour, two different
 implementation were done: the simplest, where both free vertexes and tour were
 stored with simple lists (for a heap and for spacial indexing, respectively); and the
-fastest, where the free vertexes were stored in a 
+fastest, where the free vertexes were stored in a
 [B-Tree](http://en.wikipedia.org/wiki/B-tree), as a priority queue, and the tour was
 stored in a [K-d Tree](http://en.wikipedia.org/wiki/K-d_tree), for spacial indexing.
 
 #### First version --- Lists
 
 In this first implementation, both sets of vertexes, the free ones and the tour, are
-stored using simple lists. The pour performance of this implementation comes from 
+stored using simple lists. The pour performance of this implementation comes from
 the necessity of a full transversal of the lists for some operations over them.
 
 A naive implementation would spend $O(n^2)$ to search for the
@@ -80,11 +80,11 @@ and the tour can be updated considering only the last inserted vertex of the tou
 
 #### Second version --- B-tree and Kd-tree
 
-In the second implementation, the free vertexes are stored in a B-tree and tour in a 
+In the second implementation, the free vertexes are stored in a B-tree and tour in a
 Kd-tree. The main advantage of using a B-tree for the free vertexes is the
 possibility of indexing them respectively to their distance to the tour, working like
-a priority queue, in an always balanced tree. This means that we can take the 
-farthest vertex and update the tree always in $O(\log n)$, even for the worst case. 
+a priority queue, in an always balanced tree. This means that we can take the
+farthest vertex and update the tree always in $O(\log n)$, even for the worst case.
 
 Every time we add a new vertex to the tour, creating therefore a new edge, the
 distance of every remaining free vertex should continue the same or be decreased. We
@@ -92,7 +92,7 @@ can check this by searching for the new farthest vertex, in $O(\log n)$, and
 recalculating its distance to the tour; if it didn't changed, we don't need to worry
 about the tree's indexes and no updates need to be made; otherwise, we take the
 vertex and inserted it again in the tree and repeat the procedure of searching the
-farthest vertex and updating its distance. Note that unnecessary distance updates 
+farthest vertex and updating its distance. Note that unnecessary distance updates
 are always avoided.
 
 On the other hand, the Kd-tree is used as an efficient data structure to look for the
@@ -104,13 +104,13 @@ tree favors searches involving multidimensional search keys, like the coordinate
 and $y$ in a 2D space. So, an insertion of a vertex by its coordinates can be done
 in $O(\log n)$ too.
 
-{% include image.html url="http://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Kdtree_2d.svg/500px-Kdtree_2d.svg.png" description="Visual representation of a Kd-tree structure." width="400" %}
+[Visual representation of a Kd-tree structure](http://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Kdtree_2d.svg/500px-Kdtree_2d.svg.png)
 
 Like the first implementation, the main loop of the algorithm is executed until
-we don't have any remaining free vertex. The efficiency difference comes from 
+we don't have any remaining free vertex. The efficiency difference comes from
 the search and insertion of the farthest vertex. The B-tree allows us to search
-for the farthest vertex in $O(\log n)$, since we are using a balanced tree 
-and the distance update is done considering only the last vertex inserted in the 
+for the farthest vertex in $O(\log n)$, since we are using a balanced tree
+and the distance update is done considering only the last vertex inserted in the
 tour. As the Kd-tree divides the 2D space in two half-spaces, we can insert a
 vertex using its $x$ and $y$ coordinates in $O(\log n)$. Therefore, this second
 implementation of the Farthest Insertion can run in $O(n \log n)$.

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Getting Started with Common Lisp"
 description: "A collection of information to getting started with Common Lisp"
 category: Programming
@@ -8,7 +8,7 @@ mathjax:
 lang:
 trans:
 ---
-{% include JB/setup %}
+
 
 * toc
 {:toc}
