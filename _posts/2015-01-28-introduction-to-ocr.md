@@ -5,13 +5,7 @@ description: "Gentle introduction to Optical Character Recognition (OCR)"
 category: Machine Learning
 tags: [image processing, OCR]
 mathjax: true
-lang:
-trans:
 ---
-
-
-* toc
-{:toc}
 
 In this post, I'll try to give some basic understanding about the difference between
 a *raw text* and a text represented by an image, then give an overview of a common

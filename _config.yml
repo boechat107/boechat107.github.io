@@ -39,6 +39,7 @@ defaults:
     values:
       layout: single
       toc: true
+      toc_label: Post Contents
       author_profile: true
       read_time: true
       comments: # true

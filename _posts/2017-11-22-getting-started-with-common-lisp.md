@@ -9,9 +9,8 @@ lang:
 trans:
 ---
 
-
-* toc
-{:toc}
+Here you can find short notes about setting up a fresh Common Lisp environment
+and how to create your first project.
 
 ## Environment Setup
 
@@ -71,6 +70,9 @@ The project structure (or the "system") is defined in the file
 **some-project-name.asd**. Follow
 [this](http://lisp-lang.org/learn/writing-libraries) reference to understand
 better the file.
+
+Cloning a [project template](https://github.com/boechat107/cl-project-template)
+is another quick approach.
 
 ### Version Management
 

@@ -5,8 +5,7 @@ description: "The first experience we never forget..."
 category: Programming
 tags: [Clojure, Mobile, Clojurescript]
 mathjax:
-lang:
-trans:
+toc: false
 ---
 
 
