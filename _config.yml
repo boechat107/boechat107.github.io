@@ -23,9 +23,9 @@ timezone: "America/Sao_Paulo" # https://en.wikipedia.org/wiki/List_of_tz_databas
 category_archive:
   type: liquid
   path: /categories/
-tag_archive:
-  type: liquid
-path: /tags/
+# tag_archive:
+#   type: liquid
+# path: /tags/
 
 words_per_minute: 100
 search: true
