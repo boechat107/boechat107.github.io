@@ -8,13 +8,15 @@ mathjax:
 toc: false
 ---
 
-
-<img src="/images/jim-carrey-dumb-and-dumber-limo2.jpg" width="600">
-
-Everybody seems to have developed a mobile app in his life, so I always thought
-that mine was just a matter of time. Last week I finally decided to take this
-next step and I started to look for more information about mobile
+Everybody seems to have developed a mobile app at least once in his life, so I
+always thought that mine was just a matter of time. Last week I finally decided
+to take this next step and I started to look for more information about mobile
 development.
+
+{% include figure
+    image_path="/images/jim-carrey-dumb-and-dumber-limo2.jpg"
+    alt="dumb"
+    caption="Me after doing my first mobile app." %}
 
 Around three years ago, I tried to play with the Android SDK and
 Java, but I found the documentation very confusing and I thought I didn't have

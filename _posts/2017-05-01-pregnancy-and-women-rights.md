@@ -5,8 +5,7 @@ description: "Pregnancy, employment and women rights"
 category: Opinion
 tags: [Pregnancy]
 mathjax:
-lang:
-trans:
+toc: false
 ---
 
 

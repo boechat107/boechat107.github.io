@@ -39,8 +39,10 @@ subplot(1,2,2), imshow(h_gray)
 ![text baselines](http://i59.tinypic.com/2mnoow0.png)
 <img alt="text baselines" src="http://i59.tinypic.com/2mnoow0.png" width="700">
 -->
-
-[Baseline removal's result. The original image can be found at http://handwritinguniversity.com/images/dhembree/dannyhembree1.jpg.](http://i59.tinypic.com/2mnoow0.png)
+{% include figure
+    image_path="http://i59.tinypic.com/2mnoow0.png"
+    alt="result"
+    caption="Baseline removal's result. The original image can be found at http://handwritinguniversity.com/images/dhembree/dannyhembree1.jpg." %}
 
 For me, the results are pretty impressive! Although some small parts of the lines
 were not totally removed, the text seems intact, and I didn't even tunned the

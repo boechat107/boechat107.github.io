@@ -5,10 +5,17 @@ description: "A functional implementation to solve the problem of the shortest t
 category: Research Problems
 tags: [Haskell, Optimization]
 mathjax: true
+gallery:
+    - url: http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI1.gif
+      image_path: http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI1.gif
+      alt: "Euclidean points"
+      title: "Euclidean points"
+    - url: http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI8.gif
+      image_path: http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI8.gif
+      alt: "tsp tour"
+      title: "TSP tour"
+
 ---
-
-
-# Travelling Salesman Problem
 
 This post comes from a work done over an undergraduate course,
 [Programming Languages 2](http://www.inf.ufes.br/~raulh/), where the
@@ -22,10 +29,7 @@ given a set of Euclidean 2D points, the problem consist of finding the
 shortest possible tour, which should pass over each point just once and come back to
 the initial tour.
 
-<div style="display:inline-block;width:100%;">
-<img alt="Euclidean points" src="http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI1.gif" style="float:left;border:1px green solid" width="250">
-<img alt="TSP tour" src="http://users.cs.cf.ac.uk/C.L.Mumford/howard/FI8.gif" style="float:right;border:1px green solid" width="250">
-</div>
+{% include gallery caption="" %}
 
 Two different algorithms, or heuristics, were used to construct the tour (the path to
 visit all vertices or cities):
@@ -104,7 +108,10 @@ tree favors searches involving multidimensional search keys, like the coordinate
 and $y$ in a 2D space. So, an insertion of a vertex by its coordinates can be done
 in $O(\log n)$ too.
 
-[Visual representation of a Kd-tree structure](http://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Kdtree_2d.svg/500px-Kdtree_2d.svg.png)
+{% include figure
+    image_path="http://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Kdtree_2d.svg/500px-Kdtree_2d.svg.png"
+    alt="kd-tree"
+    caption="Visual representation of a Kd-tree structure" %}
 
 Like the first implementation, the main loop of the algorithm is executed until
 we don't have any remaining free vertex. The efficiency difference comes from
