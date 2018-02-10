@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Book Recommendation: Pragmatic Thinking and Learning"
 description: "A book to help you debug yourself and learn more effectively"
 category: Education
@@ -8,7 +8,7 @@ mathjax: false
 lang:
 trans:
 ---
-{% include JB/setup %}
+
 
 Some days ago I finished a very interesting book called
 [*Pragmatic Thinking and Learning*](https://www.amazon.com/Pragmatic-Thinking-Learning-Refactor-Programmers/dp/1934356050),

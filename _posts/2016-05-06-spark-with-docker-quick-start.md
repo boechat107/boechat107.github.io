@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Apache Spark with Docker - very quick start"
 description: "How to quickly start using Apache Spark with Docker"
 category: Machine Learning
@@ -8,7 +8,7 @@ mathjax: true
 lang: 
 trans: 
 ---
-{% include JB/setup %}
+
 
 Would you like to quickly start testing some code using
 [Spark](http://spark.apache.org/)? Perhaps this post can help you to achieve this

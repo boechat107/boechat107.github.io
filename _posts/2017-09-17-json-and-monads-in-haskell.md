@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "JSON and Monads in Haskell"
 description: "Simple example of using Haskell to read JSON files."
 category: Programming
@@ -8,7 +8,7 @@ mathjax: true
 lang:
 trans:
 ---
-{% include JB/setup %}
+
 
 The problem is simple, but it took me some hours to figure it out. I had a JSON
 file composed of a single dictionary where the values were lists of numbers,
