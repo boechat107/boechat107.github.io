@@ -29,6 +29,9 @@ understanding.
 
 ## Benefits
 
+These are just a few benefits, the ones I observed quickly after starting using
+Mypy.
+
 ### Readability
 
 As well cited in a
@@ -67,6 +70,20 @@ Mypy would correctly complain about your types:
 pycode.py:4: error: Incompatible return value type
 (got "Tuple[str, ...]", expected "List[str]")
 ```
+
+
+
+
+### Fewer Tests
+
+Given enough type annotations, some simple unit tests including type checking
+(which would depend on the runtime data) could be automatically replaced by the
+static type checker. The type inference engine could spot bugs in many different
+places, specially as new code is added to the code base.
+
+Of course, these tests are not usually the most important, but type checking
+your code gives you confidence to focus on testing the most important parts of
+the application.
 
 
 ### Debugging
