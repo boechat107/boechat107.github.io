@@ -89,7 +89,60 @@ the application.
 ### Debugging
 
 How many times have you needed to trace back a chain of functions or
-method calls just to be sure about data type?
+method calls just to be sure about a data type?
+
+After a few months annotating types, I notice that the debugging started to
+become easier and faster.
+The type checking helped me avoid many stupid mistakes with `None` values, for
+example; sometimes when I forgot to add a return statement (maybe I was too
+*Lispy*), sometimes when I just forgot that a `None` was a possible return value
+of a function.
+
+An example:
+
+```python
+from typing import Optional
+
+## Version 1
+def post_some_data(url, data):
+    """Makes a POST request to the given "url" using "data" as a payload. If
+    some 4xx or 5xx response is gotten, the response body is returned as a
+    string; otherwise, "None" is returned.
+    * url: string
+    * data: dictionary
+    """
+    ...
+
+## Version 2
+## This doesn't mean that documentation is not important, I'm just stressing the
+## difference.
+def post_some_data(url: str, data: dict) -> Optional[str]:
+    ...
+```
+
+While debugging your application for an apparently `None` value problem, which
+version do you think would help you to avoid the wrong spot? The first one has a
+reasonable documentation, but, at least to me, I still feel better about the
+second version, specially if the type checker tells me that the types are OK (of
+course, this may depend on how much annotation we have). The `Optional` type
+tells me that whoever uses this function should be prepared to handle a string
+or `None`. How could I be sure that the first version really returns a string?
+What if someone updated the code to return some response object and forgot to
+update the docstring?
+
+
+### Gradual Typing
+
+This seems to be a kind of
+[official term](https://en.wikipedia.org/wiki/Gradual_typing) to represent type
+systems in which dynamic and static types are used together. Some parts could be
+type checked at *compile time* (or *non-runtime* in Python) and others only at
+runtime. Mypy supports this mixed approach; it keeps the freedom to those who
+likes the Python dynamic nature to quickly prototype ideas while providing tools
+to confirm the correctness of critical parts of an application.
+
+* example of db.state of lambdazome; initially it was a simple string, then it
+    became a type
 
 It's important to note that Mypy, for instance, doesn't require type annotations
 for a whole module or project, mixing static and dynamically type code is
