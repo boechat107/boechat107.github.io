@@ -141,18 +141,85 @@ runtime. Mypy supports this mixed approach; it keeps the freedom to those who
 likes the Python dynamic nature to quickly prototype ideas while providing tools
 to confirm the correctness of critical parts of an application.
 
-* example of db.state of lambdazome; initially it was a simple string, then it
-    became a type
+As an example, suppose your application stores some kind of request into a
+database and each one has its own state. Usually we want to guarantee that
+nobody accidentally insert invalid values and we end up with a code similar to
+this one:
 
-It's important to note that Mypy, for instance, doesn't require type annotations
-for a whole module or project, mixing static and dynamically type code is
-expected ([gradual typing](https://en.wikipedia.org/wiki/Gradual_typing)).
+```python
+def dbexec(data0, data1):
+    "A function from a database library."
+    pass
 
-* war between dynamic and static
-* one should recognize the good points of both sides
-* Python is very popular, specially in areas such machine learning
-* "gradual typing" and MyPy seems to be bring some of the good points of
-    statically typed languages
+STATE_0 = 'posted'
+STATE_1 = 'processing'
+STATE_2 = 'finished'
+
+def update_state(request, state):
+    if state not in set([STATE_0, STATE_1, STATE_2]):
+        raise(Exception("Invalid request state"))
+    dbexec(request['id'], state)
+```
+
+If a new state constant is added, the `set` in `update_state` also needs to be
+updated. We can improve this code and make it safer by using an **Enum** class
+to enumerate the valid request states:
+
+```python
+from enum import Enum
+
+def dbexec(data0, data1):
+    "A function from a database library."
+    pass
+
+class ReqState(Enum):
+    STATE_0 = 'posted'
+    STATE_1 = 'processing'
+    STATE_2 = 'finished'
+
+def update_state(request, state):
+    if not isinstance(state, ReqState):
+        raise(Exception("Invalid request state"))
+    dbexec(request['id'], state.value)
+```
+
+Although it's better than before, we still can only rely on runtime checking.
+Mypy give us the possibility of checking the code before running it. Using type
+annotations, the code would like like this:
+
+```python
+from enum import Enum
+
+def dbexec(data0, data1):
+    "A function from a database library."
+    pass
+
+class ReqState(Enum):
+    STATE_0 = 'posted'
+    STATE_1 = 'processing'
+    STATE_2 = 'finished'
+
+
+def update_state(request: dict, state: ReqState):
+    ## Running Mypy before starting the application makes this checking
+    ## unnecessary.
+    # if not isinstance(state, ReqState):
+    #        raise(Exception("Invalid request state"))
+    dbexec(request['id'], state.value)
+```
+
+Now the *state* validation is done before runtime, making the previous
+`isinstance` statement unnecessary and the code base safer against many common
+stupid bugs. Of course, if the *state* is expected to come from some IO
+operation, the runtime checking can't be avoided.
+
+Another interesting to be noted in this last version is the type definition of
+the argument `request`. We can be as much specific as we want about a type. We
+are saying that a *request* must be a dictionary, but we could also say that it
+is a dictionary like `Dict[str, int]` (string keys, integer values) or even
+define a very specific structure using a *dict* like class. Or we could even
+don't specify any type at all and still have the *state* being statically
+checked.
 
 ## Usage
 
