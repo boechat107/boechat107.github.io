@@ -105,17 +105,18 @@ from typing import Optional
 
 ## Version 1
 def post_some_data(url, data):
-    """Makes a POST request to the given "url" using "data" as a payload. If
-    some 4xx or 5xx response is gotten, the response body is returned as a
-    string; otherwise, "None" is returned.
+    """Makes a POST request to the given "url" using "data"
+    as a payload. If some 4xx or 5xx response is gotten,
+    the response body is returned as a string; otherwise,
+    "None" is returned.
     * url: string
     * data: dictionary
     """
     ...
 
 ## Version 2
-## This doesn't mean that documentation is not important, I'm just stressing the
-## difference.
+## This doesn't mean that documentation is not important,
+## I'm just stressing the difference.
 def post_some_data(url: str, data: dict) -> Optional[str]:
     ...
 ```
@@ -201,8 +202,8 @@ class ReqState(Enum):
 
 
 def update_state(request: dict, state: ReqState):
-    ## Running Mypy before starting the application makes this checking
-    ## unnecessary.
+    ## Running Mypy before starting the application makes
+    ## this checking unnecessary.
     # if not isinstance(state, ReqState):
     #        raise(Exception("Invalid request state"))
     dbexec(request['id'], state.value)
@@ -213,23 +214,40 @@ Now the *state* validation is done before runtime, making the previous
 stupid bugs. Of course, if the *state* is expected to come from some IO
 operation, the runtime checking can't be avoided.
 
-Another interesting to be noted in this last version is the type definition of
-the argument `request`. We can be as much specific as we want about a type. We
-are saying that a *request* must be a dictionary, but we could also say that it
+Another interesting detail is the type definition of the argument `request`. We
+can be as much specific as we want about a type.
+It says that a `request` must be a dictionary, but it could also say that it
 is a dictionary like `Dict[str, int]` (string keys, integer values) or even
-define a very specific structure using a *dict* like class. Or we could even
-don't specify any type at all and still have the *state* being statically
-checked.
+define a very specific structure using a `dict` like class. Or we could even
+don't specify any type at all and still have `state` being statically checked.
 
 ## Usage
 
-* some code samples
-* cli invocation
-* cli options (like ignore imports)
+### Annotation syntax
 
-## Part of your CI
+[Mypy syntax cheat sheet](http://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
+is a really good reference, all the most used stuff in a single page.
 
-* example of using Docker with mypy
+### Running Mypy
+
+After
+[installing Mypy](http://mypy.readthedocs.io/en/latest/getting_started.html),
+you just need to run it in your project directory
+([flags explanation](http://mypy.readthedocs.io/en/latest/command_line.html#additional-command-line-flags)):
+
+```bash
+mypy --ignore-missing-imports project-dir/
+```
+
+Mypy can also be used as a linter in Vim using
+[Syntastic](https://github.com/vim-syntastic/syntastic).
+
+### Add it to your CI
+
+This is one of the most useful ways to use Mypy: a test stage in your CI
+pipeline. I use to add it as a step just before the tests execution; if the type
+checking fails, I don't even bother to run the tests and the pipeline is marked
+as failed.
 
 
 ## Conclusion
@@ -237,8 +255,10 @@ checked.
 * why don't you go with a statically typed language?
     * Python and its vast number of libraries, specially for machine learning.
 
+
 ## References
 
 * https://docs.python.org/3.5/library/typing.html
-* http://mypy-lang.org
 * https://www.python.org/dev/peps/pep-0484/
+* http://mypy-lang.org
+* http://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html
