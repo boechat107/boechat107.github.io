@@ -9,11 +9,11 @@ mathjax:
 
 I was recently surprised to discover that a module called
 [**typing**](https://docs.python.org/3.5/library/typing.html) had been added to
-Python 3, providing the fundamental building for constructing types. Although
-these types are simple hints and have
+Python 3, providing the fundamental building blocks for constructing types.
+Although these types are simple hints and have
 [no semantics defined](https://www.python.org/dev/peps/pep-0484/#abstract) in
 the language, third party libraries can make use of them to do static type
-checking working like a linter.
+checking.
 
 A project called [**Mypy**](http://mypy-lang.org/about.html), initially developed
 by a Dropbox team, is able to statically check Python code using a powerful type
@@ -36,11 +36,13 @@ Mypy.
 
 As well cited in a
 [Zulip's blog post](http://blog.zulip.org/2016/10/13/static-types-in-python-oh-mypy/),
-readability is one the biggest and immediate benefits of statically type checking
-the code. In many situations, good function and argument names, together with
-their types, suffice to make clear their intentions. Of course this could also
-be done as a docstring, but if you update the function you need to remember to
-check if the docstring is still consistent.
+readability is one the biggest and immediate benefits of annotating types for
+statically type checking.
+In many situations, good function and argument naming conventions, together with
+their annotated types, suffice to make clear their intentions.
+And it is better than using *docstrings* because the type checker would
+guarantee that your annotations are still compatible with your code after
+updating it.
 
 For example, considering a `s3path` being a string like
 `s3://my-bucket/path/to/key`:
@@ -53,7 +55,8 @@ def split_bucket_key(s3path: str) -> List[str]:
 ```
 
 This code successfully passes the type checking. But then you decide that
-returning a **tuple** makes a better interface:
+returning a **tuple** makes a better interface and you accidentally forget to
+update the type annotation:
 
 ```python
 from typing import List
@@ -252,8 +255,9 @@ as failed.
 
 ## Conclusion
 
-* why don't you go with a statically typed language?
-    * Python and its vast number of libraries, specially for machine learning.
+The inclusion of type annotation syntax and the development of a static type
+checker such as Mypy are a great step the Python community has taken towards
+safer and clearer code, without giving up the language's dynamic nature.
 
 
 ## References
