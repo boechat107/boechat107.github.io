@@ -34,13 +34,13 @@ Mypy.
 
 ### Readability
 
-As well cited in a
+As well mentioned in a
 [Zulip's blog post](http://blog.zulip.org/2016/10/13/static-types-in-python-oh-mypy/),
 readability is one the biggest and immediate benefits of annotating types for
 statically type checking.
 Even when using dynamic languages, it's a good practice to describe, whenever
 possible, the signature of a function
-([*How to Design Programs*](https://is.gd/iF59HL) examples), describing the
+([*How to Design Programs*](https://is.gd/iF59HL) examples), noting the
 input and output types. This simple practice can save a lot of time when
 debugging a code, since you wouldn't need to trace back a chain of function
 calls to determine the type of some data.
@@ -51,7 +51,7 @@ very common to change the input/output types of functions over its lifetime,
 but there is no guarantee that their documentation are consistent if they are
 not automatically checked.
 
-For example, considering a `s3path` being a string like
+For example, let's consider the function argument `s3path` being a string like
 `s3://my-bucket/path/to/key`:
 
 ```python
@@ -96,7 +96,7 @@ The examples in the next subsections illustrate this idea.
 
 In addition to readability, describing function signatures helps debugging,
 specially if you can trust this information. Instead of worrying about types and
-values, we can focus only on values and this can be a tremendous difference.
+values, we can focus only on values, and this can be a tremendous difference.
 
 In the example below we have two versions of an hypothetical function whose
 purpose is to make a POST request. The first version relies entirely on
@@ -128,8 +128,8 @@ def post_some_data(url: str, data: dict) -> Optional[str]:
     return random.choice(['something useful', None])
 ```
 
-Suppose somewhere in our code base we this function, but forget that it not
-always returns a string:
+Suppose somewhere in our code base we use this function, but we forget that it
+not always returns a string:
 
 ```python
 resp_err = post_some_data('www.blabla.com', {'key': 'value'})
@@ -190,7 +190,7 @@ def update_state(request, state):
 ```
 
 If a new state constant is added, the `set` in `update_state` also needs to be
-updated. We can improve this code and make it safer by using an **Enum** class
+updated. We can improve this code and make it safer by using an `Enum` class
 to enumerate the valid request states:
 
 ```python
@@ -211,7 +211,8 @@ def update_state(request, state):
     dbexec(request['id'], state.value)
 ```
 
-Although it's better than before, we still can only rely on runtime checking.
+Although it's better than before, we still can only rely on runtime checking and
+unit tests.
 Mypy give us the possibility of checking the code before running it. Using type
 annotations, the code would be like this:
 
@@ -287,8 +288,8 @@ safer and clearer code, without giving up the language's dynamic nature.
 
 ## References
 
-* https://docs.python.org/3.5/library/typing.html
-* https://www.python.org/dev/peps/pep-0484/
-* http://mypy-lang.org
-* http://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html
+* [https://docs.python.org/3.5/library/typing.html](https://docs.python.org/3.5/library/typing.html)
+* [https://www.python.org/dev/peps/pep-0484/](https://www.python.org/dev/peps/pep-0484/)
+* [http://mypy-lang.org](http://mypy-lang.org)
+* [http://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html](http://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html)
 * [How to Design Programs](http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html)
