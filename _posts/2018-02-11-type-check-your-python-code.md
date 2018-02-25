@@ -38,11 +38,18 @@ As well cited in a
 [Zulip's blog post](http://blog.zulip.org/2016/10/13/static-types-in-python-oh-mypy/),
 readability is one the biggest and immediate benefits of annotating types for
 statically type checking.
-In many situations, good function and argument naming conventions, together with
-their annotated types, suffice to make clear their intentions.
-And it is better than using *docstrings* because the type checker would
-guarantee that your annotations are still compatible with your code after
-updating it.
+Even when using dynamic languages, it's a good practice to describe, whenever
+possible, the signature of a function
+([*How to Design Programs*](https://is.gd/iF59HL) examples), describing the
+input and output types. This simple practice can save a lot of time when
+debugging a code, since you wouldn't need to trace back a chain of function
+calls to determine the type of some data.
+
+However, if the signature of functions can be only described by *comments* or
+*docstrings*, we have another possible point of failure: buggy signatures. It is
+very common to change the input/output types of functions over its lifetime,
+but there is no guarantee that their documentation are consistent if they are
+not automatically checked.
 
 For example, considering a `s3path` being a string like
 `s3://my-bucket/path/to/key`:
@@ -75,64 +82,80 @@ pycode.py:4: error: Incompatible return value type
 ```
 
 
+### Fewer Unit Tests
 
+Given enough type annotations, unit tests composed of runtime type checking
+could be just replaced by the general static type checking done by Mypy.
+The type inference engine could spot bugs in many different places, specially as
+new code is added to the code base.
 
-### Fewer Tests
-
-Given enough type annotations, some simple unit tests including type checking
-(which would depend on the runtime data) could be automatically replaced by the
-static type checker. The type inference engine could spot bugs in many different
-places, specially as new code is added to the code base.
-
-Of course, these tests are not usually the most important, but type checking
-your code gives you confidence to focus on testing the most important parts of
-the application.
+The examples in the next subsections illustrate this idea.
 
 
 ### Debugging
 
-How many times have you needed to trace back a chain of functions or
-method calls just to be sure about a data type?
+In addition to readability, describing function signatures helps debugging,
+specially if you can trust this information. Instead of worrying about types and
+values, we can focus only on values and this can be a tremendous difference.
 
-After a few months annotating types, I notice that the debugging started to
-become easier and faster.
-The type checking helped me avoid many stupid mistakes with `None` values, for
-example; sometimes when I forgot to add a return statement (maybe I was too
-*Lispy*), sometimes when I just forgot that a `None` was a possible return value
-of a function.
-
-An example:
+In the example below we have two versions of an hypothetical function whose
+purpose is to make a POST request. The first version relies entirely on
+*docstrings* as its documentation, while the second uses type annotation that
+can be checked using Mypy.
 
 ```python
+import random
 from typing import Optional
 
 ## Version 1
 def post_some_data(url, data):
     """Makes a POST request to the given "url" using "data"
-    as a payload. If some 4xx or 5xx response is gotten,
-    the response body is returned as a string; otherwise,
-    "None" is returned.
+    as a payload and returns the response's body as a string.
+    If some error occurs (4xx or 5xx response), "None" is
+    returned.
     * url: string
     * data: dictionary
     """
-    ...
+    # Make the real request...
+    return random.choice(['something useful', None])
 
 ## Version 2
-## This doesn't mean that documentation is not important,
-## I'm just stressing the difference.
 def post_some_data(url: str, data: dict) -> Optional[str]:
-    ...
+    """Returns the response's body for successful requests;
+    otherwise, returns "None".
+    """
+    # Make the real request...
+    return random.choice(['something useful', None])
 ```
 
-While debugging your application for an apparently `None` value problem, which
-version do you think would help you to avoid the wrong spot? The first one has a
-reasonable documentation, but, at least to me, I still feel better about the
-second version, specially if the type checker tells me that the types are OK (of
-course, this may depend on how much annotation we have). The `Optional` type
-tells me that whoever uses this function should be prepared to handle a string
-or `None`. How could I be sure that the first version really returns a string?
-What if someone updated the code to return some response object and forgot to
-update the docstring?
+Suppose somewhere in our code base we this function, but forget that it not
+always returns a string:
+
+```python
+resp_err = post_some_data('www.blabla.com', {'key': 'value'})
+# An accidental mistake.
+resp_err.split(' ')
+```
+
+Using the first version, we could only notice this bug when a request fails, at
+runtime (or we can never get it at all):
+
+```python
+Traceback (most recent call last):
+  File "pycode.py", line 9, in <module>
+    a.split(' ')
+AttributeError: 'NoneType' object has no attribute 'split'
+```
+
+If we write the same buggy code using the second version and call Mypy, we
+instantly get the bug without even executing the code:
+
+```bash
+$ mypy --strict-optional pycode.py
+
+pycode.py:8: error: Item "None" of "Optional[str]" has no
+attribute "split"
+```
 
 
 ### Gradual Typing
@@ -143,7 +166,8 @@ systems in which dynamic and static types are used together. Some parts could be
 type checked at *compile time* (or *non-runtime* in Python) and others only at
 runtime. Mypy supports this mixed approach; it keeps the freedom to those who
 likes the Python dynamic nature to quickly prototype ideas while providing tools
-to confirm the correctness of critical parts of an application.
+to confirm the correctness (in terms of types) of critical parts of an
+application.
 
 As an example, suppose your application stores some kind of request into a
 database and each one has its own state. Usually we want to guarantee that
@@ -189,7 +213,7 @@ def update_state(request, state):
 
 Although it's better than before, we still can only rely on runtime checking.
 Mypy give us the possibility of checking the code before running it. Using type
-annotations, the code would like like this:
+annotations, the code would be like this:
 
 ```python
 from enum import Enum
@@ -213,16 +237,17 @@ def update_state(request: dict, state: ReqState):
 ```
 
 Now the *state* validation is done before runtime, making the previous
-`isinstance` statement unnecessary and the code base safer against many common
-stupid bugs. Of course, if the *state* is expected to come from some IO
+`isinstance` statement unnecessary and the code base safer against many common,
+accidental bugs. Of course, if the *state* is expected to come from some IO
 operation, the runtime checking can't be avoided.
 
 Another interesting detail is the type definition of the argument `request`. We
 can be as much specific as we want about a type.
 It says that a `request` must be a dictionary, but it could also say that it
-is a dictionary like `Dict[str, int]` (string keys, integer values) or even
-define a very specific structure using a `dict` like class. Or we could even
-don't specify any type at all and still have `state` being statically checked.
+shall be a dictionary like `Dict[str, int]` (string keys, integer values) or
+even define a very specific structure using a `dict` like class. Or we could
+even don't specify any type at all and still have `state` being statically
+checked (as it is done with the *return* type).
 
 ## Usage
 
@@ -239,7 +264,7 @@ you just need to run it in your project directory
 ([flags explanation](http://mypy.readthedocs.io/en/latest/command_line.html#additional-command-line-flags)):
 
 ```bash
-mypy --ignore-missing-imports project-dir/
+mypy --ignore-missing-imports --strict-optional project-dir/
 ```
 
 Mypy can also be used as a linter in Vim using
@@ -250,7 +275,7 @@ Mypy can also be used as a linter in Vim using
 This is one of the most useful ways to use Mypy: a test stage in your CI
 pipeline. I use to add it as a step just before the tests execution; if the type
 checking fails, I don't even bother to run the tests and the pipeline is marked
-as failed.
+as *failed*.
 
 
 ## Conclusion
@@ -266,3 +291,4 @@ safer and clearer code, without giving up the language's dynamic nature.
 * https://www.python.org/dev/peps/pep-0484/
 * http://mypy-lang.org
 * http://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html
+* [How to Design Programs](http://www.ccs.neu.edu/home/matthias/HtDP2e/index.html)
