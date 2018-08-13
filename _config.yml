@@ -51,7 +51,7 @@ defaults:
 author:
   name             : "Andre Boechat"
   avatar           : "/images/avatar5.jpg"
-  bio              : "By writing high quality, nontrivial code and looking at different ways to solve problems, I help teams of software developers to design, implement and run profitable solutions."
+  bio              : "I help teams of software developers to design, implement and run profitable solutions."
   location         : "Florianopolis, Brazil"
   email            : *aemail
   uri              : *urlsite
