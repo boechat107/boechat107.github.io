@@ -8,9 +8,12 @@ tags: [Shell, Unix]
 
 In many situations, unprepared data scientists can spend much more time than
 necessary on secondary tasks.
-Although their main concern should stay at analysing data, checking hypothesis,
+Although their attention should stay on analysing data, checking hypothesis,
 engineering features, etc., they often need to get their hands dirty and code
 auxiliary scripts and parsers to get the information they need.
+
+Prepared data scientists prefer to use Unix commands and solve their secondary
+tasks in a few seconds.
 
 This post presents 7 basic Unix commands (maybe eight) that, once incorporated
 in the day-by-day toolset, can potentially improve the productivity of any data
