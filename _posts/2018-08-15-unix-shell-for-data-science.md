@@ -1,30 +1,38 @@
 ---
 layout: single
-title: "6 Unix Commands Every Data Scientist Should Know"
-description: "6 Unix Commands Every Data Scientist Should Know"
+title: "7 Unix Commands Every Data Scientist Should Know"
+description: "7 Unix Commands Every Data Scientist Should Know"
 category: Programming
 tags: [Shell, Unix]
 ---
 
-In some situations, unprepared data scientists can spend much more time than
+In many situations, unprepared data scientists can spend much more time than
 necessary on secondary tasks.
 Although their main concern should stay at analysing data, checking hypothesis,
 engineering features, etc., they often need to get their hands dirty and code
 auxiliary scripts and parsers to get the information they need.
 
-This post presents 6 basic Unix commands (maybe seven) that, once incorporated
+This post presents 7 basic Unix commands (maybe eight) that, once incorporated
 in the day-by-day toolset, can potentially improve the productivity of any data
-scientist:
+scientist.
+The beauty of these tools is the ability to easily combine them into powerful
+commands, executing tasks that could take a full day of coding to get them
+right.
+
+This is the selected list, probably in the order of most frequent usage:
 
 * [grep](#grep)
 * [cat](#cat)
 * [find](#find)
-* [wc](#wc)
 * [head/tail](#headtail)
+* [wc](#wc)
 * [awk](#awk)
+* [shuf](#shuf)
 
 In addition, it is shown how two auxiliary commands (`xargs` and `man`) can
-improve even further the usability of the six commands above.
+improve even further the usability of the 7 commands above.
+
+# 7 Unix Commands
 
 ## grep
 
@@ -154,6 +162,26 @@ Note that:
 
 [^2]: Using `grep` recursively would bring all lines of all files containing `boto3`; the result can be too big to be useful.
 
+## head/tail
+
+Like working with *DataFrames*, `head` and `tail` print the first and the last
+lines of files or the standard input.
+
+### Examples
+
+**Problem:** Given a CSV file, we want to quickly look at its header.
+
+```
+$ head -n 1 data.csv
+```
+
+**Problem:** From a potentially huge log file, we want to read only its last
+20 events.
+
+```
+$ tail -n 20 app.log
+```
+
 ## wc
 
 `wc` is very useful to count lines, words or even characters in files or the
@@ -176,26 +204,6 @@ $ wc -l data_dir/*.csv
 102224 data_dir/part-00000-02aa95cd-3907-44c8-87ee-97ff44677349-c000.csv
 102513 data_dir/part-00001-02aa95cd-3907-44c8-87ee-97ff44677349-c000.csv
 204737 total
-```
-
-## head/tail
-
-Like working with *DataFrames*, `head` and `tail` print the first and the last
-lines of files or the standard input.
-
-### Examples
-
-**Problem:** Given a CSV file, we want to quickly look at its header.
-
-```
-$ head -n 1 data.csv
-```
-
-**Problem:** From a potentially huge log file, we want to read only its last
-20 events.
-
-```
-$ tail -n 20 app.log
 ```
 
 ## awk
@@ -234,6 +242,36 @@ var_x
 2.0
 3.0
 ```
+
+
+## shuf
+
+`shuf` generates a random permutation of its inputs, very useful to sample data.
+
+### Examples
+
+**Problem:** Given a CSV file, we want to take a random sample (50 records) from
+it and save this sample in another file.
+
+```
+$ cat big_csv.csv | shuf | head -n 50 > sample_from_big_csv.csv
+```
+
+As expected, every time we run this command, we get a different sample.
+
+**Problem:** Given a directory containing multiple data files, we want to get a
+random sample of files (5 files) and copy these files to another directory.
+
+```
+$ find origin_dir/ -type f | shuf | head -n 5 | xargs -i cp {} sample_dir/
+```
+
+First `find` returns a list of files in `origin_dir` (including this directory
+name in their paths), then `shuf` shuffles the list of file paths, `head` takes
+the first 5 file paths and, finally, `xargs` (explained in the next section) and
+`cp` copy each these 5 files to the directory `sample_dir`.
+
+# Auxiliary Commands
 
 ## xargs
 
@@ -281,3 +319,14 @@ checking the manual of `man` itself (`man man`).
     alt="man img"
     caption="By Kamran Mackey - Arch Linux using the Cinnamon display manager., GPL, https://commons.wikimedia.org/w/index.php?curid=524936"
 %}
+
+# Conclusion
+
+This post presented 7 Unix commands to increase the productivity of data
+scientists, including examples of usage and two auxiliary commands to make even
+more powerful combinations.
+By describing common problems and possible solutions, the intention is to make
+the post a useful reference to tackle similar scenarios.
+
+More time we spend exploring and using these commands, more productive we become
+by using them.
