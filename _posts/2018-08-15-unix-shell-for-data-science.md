@@ -8,7 +8,7 @@ tags: [Shell, Unix]
 
 In many situations, unprepared data scientists can spend much more time than
 necessary on secondary tasks.
-Although their attention should stay on analysing data, checking hypothesis,
+Although their attention should stay on analyzing data, checking hypothesis,
 engineering features, etc., they often need to get their hands dirty and code
 auxiliary scripts and parsers to get the information they need.
 
@@ -40,7 +40,7 @@ improve even further the usability of the 7 commands above.
 ## grep
 
 `grep` searches for patterns in files or in the standard input. It is really
-useful to find stuff in files without opening them in an editor.
+useful to find stuff without opening files in an editor.
 
 
 ### Examples
@@ -56,13 +56,13 @@ r_project/script.R:247:t<-ggplot(base.test.c, aes(x=score, colour=gap_dic, group
 r_project/script.R:265:t<-ggplot(base.test.c[base.test.c$gap_total<40000,], aes(x=gap_total, colour=corte2, group=corte2))
 ```
 * option `-r` stands for recursion
-* option `-n` tells `grep` to show the line number in the files
+* option `-n` tells `grep` to show the line numbers
 
 **Problem:** From a big log file, we want to get only the logging messages with
 the pattern `TRAINING -`.
 
 ```
-$ grep 'TRAIN -' my_app.log
+$ grep 'TRAINING -' my_app.log
 ```
 
 Note that `grep` is case sensitive by default.
@@ -93,7 +93,7 @@ GPyOpt==1.2.5
 `grep` searches for **gpyopt** (`-i` makes it case insensitive) in the standard
 input.
 
-**Problem:** Given an arbitrary text file, we want show only those lines
+**Problem:** Given an arbitrary text file, we want to show only those lines
 containing a pattern specified by a *regex*.
 
 ```
@@ -110,7 +110,7 @@ a Python setup file.
 
 ## cat
 
-Simply prints on the screen (standard output) the contents of files. Simple like
+Prints on the screen (or to the standard output) the contents of files. Simple like
 that.
 
 ```
@@ -147,8 +147,8 @@ $ find my_library/modules -name '*.pyc' -delete
 ```
 
 **Problem:** In a directory containing multiple projects, we want to find all
-`setup.py` files that contain the text `boto3` (in other words, we looking for
-projects using the library **boto3**).
+`setup.py` files that contain the text `boto3` (in other words, we are looking
+for projects using the library **boto3**).
 
 
 ```
@@ -160,15 +160,15 @@ ignoring directories (`-type f`) and executing `grep` (`-exec`) on each one of
 them (why don't we just use `grep` alone?)[^2].
 Note that:
 * `{}` is used to pass a file path as an argument to `grep`
-* `\;` to mark the end of the command
+* `\;` marks the end of the command
 * `grep` parameter `-H` makes it print the filename
 
-[^2]: Using `grep` recursively would bring all lines of all files containing `boto3`; the result can be too big to be useful.
+[^2]: Using `grep` recursively would bring all lines of all files containing `boto3`; the result might be too big to be useful.
 
 ## head/tail
 
 Like working with *DataFrames*, `head` and `tail` print the first and the last
-lines of files or the standard input.
+lines of files or of the standard input.
 
 ### Examples
 
@@ -187,8 +187,7 @@ $ tail -n 20 app.log
 
 ## wc
 
-`wc` is very useful to count lines, words or even characters in files or the
-standard input.
+`wc` is very useful to count lines, words or even characters in files.
 
 ### Examples
 
@@ -196,7 +195,7 @@ standard input.
 
 ```
 $ wc -l data.csv
-1024 data.csv
+624 data.csv
 ```
 
 **Problem:** We want to know the total number of CSV records in a directory
@@ -209,6 +208,9 @@ $ wc -l data_dir/*.csv
 204737 total
 ```
 
+We may need to discount the number of header lines (this could also be done just
+using the shell).
+
 ## awk
 
 `awk` uses a programming language (AWK) for text processing. It is powerful and
@@ -217,8 +219,8 @@ can be used very frequently.
 
 ### Examples
 
-**Problem:** Given a CSV file, we want to know its number of columns just by
-analysing its header.
+**Problem:** Given a CSV file, we want to know the number of columns just by
+analyzing its header.
 
 ```
 $ head -n 1 data.csv | awk -F ',' '{print NF}'
@@ -229,8 +231,9 @@ First, `head` sends the first line to the standard output, which is consumed (as
 the standard input) by `awk` and broken up into a sequence of fields delimited
 by `,`. `NF` holds the number of fields in a line.
 
-**Problem:** Given a big CSV file containing hundreds of columns, we want have a
-quick look at the first lines of a specific column (let's say the third column).
+**Problem:** Given a big CSV file containing hundreds of columns, we want to
+have a quick look at the first lines of a specific column (let's say the third
+column).
 
 ```
 $ head data.csv | awk -F ',' '{print $3}'
@@ -249,7 +252,8 @@ var_x
 
 ## shuf
 
-`shuf` generates a random permutation of its inputs, very useful to sample data.
+`shuf` generates a random permutation of its inputs. It is very useful to sample
+data.
 
 ### Examples
 
@@ -260,7 +264,8 @@ it and save this sample in another file.
 $ cat big_csv.csv | shuf | head -n 50 > sample_from_big_csv.csv
 ```
 
-As expected, every time we run this command, we get a different sample.
+The operator `>` is used to redirect the standard output to a normal file.
+Without using it, the result of `head` would be just printed on the screen.
 
 **Problem:** Given a directory containing multiple data files, we want to get a
 random sample of files (5 files) and copy these files to another directory.
@@ -271,40 +276,33 @@ $ find origin_dir/ -type f | shuf | head -n 5 | xargs -i cp {} sample_dir/
 
 First `find` returns a list of files in `origin_dir` (including this directory
 name in their paths), then `shuf` shuffles the list of file paths, `head` takes
-the first 5 file paths and, finally, `xargs` (explained in the next section) and
-`cp` copy each these 5 files to the directory `sample_dir`.
+the first 5 file paths and, finally, `cp` copy each of these 5 files to the
+directory `sample_dir` (`xargs`, explained in the next section, is used as an
+auxiliary command since we couldn't just use the standard input).
+
 
 # Auxiliary Commands
 
 ## xargs
 
-`xargs` is a kind of an assistant program, since its role is convert the
+`xargs` is a kind of auxiliary program, since its role is to convert the
 standard input into an argument of another program. This is really useful to
-make a chain of processing programs, passing the output of one as an input of
-another.
+make a chain of processing programs that don't use the standard input.
 
 ### Examples
 
-Install Python libraries, one by one, from a **setup.py** file.  We first take
-the libraries and their versions in patterns like `'gpyopt == 1.2.5'` using
-`grep`, then we pass each one of them as an argument to `pip`. Note that `{}` is
-used as a placeholder.
-
-```
-$ grep -oP "'[\w]+ == [\d.]+'" setup.py | xargs -i pip install {}
-```
-
-Recursively find **__pycache__** directories (files are ignored because of
-`-type d`) and remove them, including their contents (`rm` is applied
-recursively with the option `-r`).
+**Problem:** We must remove all **__pycache__** directories in a given project
+directory.
 
 ```
 $ find my_app -name '__pycache__' -type d | xargs -i rm -r {}
 ```
 
-Safely remove Git branches. First we list all Git branches of a repository,
-then we pass each branch name to `git branch -d`, which delete only fully merged
-branches.
+As `find` action `-delete` can't remove nonempty directories, we use `rm -r` to
+remove all `__pycache__` folders.
+
+**Problem:** Remove all Git branches that were already fully merged with their
+upstream branches.
 
 ```
 $ git branch | xargs -i git branch -d {}
@@ -312,7 +310,7 @@ $ git branch | xargs -i git branch -d {}
 
 ## man
 
-`man` is also another assistant program. It provides an interface to reference
+`man` is also another auxiliary program. It provides an interface to reference
 manuals of almost all UNIX commands. The image below shows the result of
 checking the manual of `man` itself (`man man`).
 
