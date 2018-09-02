@@ -6,14 +6,14 @@ category: Programming
 tags: [Shell, Unix]
 ---
 
-Data scientists often need to spend a lot of time analysing data, checking
-hypothesis, engineering features, etc.; it's a lot of work. Although they aren't
-an intrinsic part of the problems, these tasks usually need scripting and
-parsing of data files. In some situations, unprepared data scientists could
-spend much more time than necessary on these secondary tasks.
+In some situations, unprepared data scientists can spend much more time than
+necessary on secondary tasks.
+Although their main concern should stay at analysing data, checking hypothesis,
+engineering features, etc., they often need to get their hands dirty and code
+auxiliary scripts and parsers to get the information they need.
 
-This post presents six basic Unix commands (maybe seven) that, once incorporated in the
-day-by-day toolset, can potentially improve the productivity of any data
+This post presents 6 basic Unix commands (maybe seven) that, once incorporated
+in the day-by-day toolset, can potentially improve the productivity of any data
 scientist:
 
 * [grep](#grep)
