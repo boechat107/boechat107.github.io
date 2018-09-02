@@ -34,10 +34,9 @@ useful to find stuff in files without opening them in an editor.
 
 ### Examples
 
-Recursively search in the directory **r_project** for the sequence of characters
-**ggplot**.
-* option `-r` stands for recursion
-* option `-n` tells `grep` to show the line number in the files
+**Problem:** We want to find where the library **ggplot** was used in any script
+in the directory **r_project**.
+
 
 ```
 $ grep -rn ggplot r_project/
@@ -45,34 +44,46 @@ r_project/script.R:4:library(ggplot2)
 r_project/script.R:247:t<-ggplot(base.test.c, aes(x=score, colour=gap_dic, group=gap_dic))
 r_project/script.R:265:t<-ggplot(base.test.c[base.test.c$gap_total<40000,], aes(x=gap_total, colour=corte2, group=corte2))
 ```
+* option `-r` stands for recursion
+* option `-n` tells `grep` to show the line number in the files
 
-Show all occurrences of the sequence **TRAIN -** in the log file. Note that
-`grep` is case sensitive by default.
+**Problem:** From a big log file, we want to get only the logging messages with
+the pattern `TRAINING -`.
 
 ```
 $ grep 'TRAIN -' my_app.log
 ```
 
-Search the pattern **2018_05** in the list of files/directories returned
-by `ls`.
-Here `grep` is searching for a pattern in the standard input.
+Note that `grep` is case sensitive by default.
+
+**Problem:** Given a directory composed of subdirectories whose names contain a
+date, we want to get the complete name of one or more subdirectories containing
+a date like `2018_05`.
 
 ```
 $ ls models_by_date/ | grep 2018_05
 ```
 
-This is a way to find installed version of a Python package.
-`pip freeze` returns a list of installed packages to the standard output and
-`grep` searches for **gpyopt** (`-i` makes it case insensitive) in the standard
-input.
+Here we use the pipe `|` operator to send the output of the first command to
+`grep` by the standard input [^1].
+
+[^1]: The standard input can be thought as a special kind of file whose contents commands have access to. The pipe operator is able to take the standard output of one command (that would otherwise be printed on the screen) and send it to the standard input of another.
+
+**Problem:** When listing all installed Python packages, we want to see only the
+results containing the name **gpyopt** (usually a single line).
+
 
 ```
 $ pip freeze | grep -i gpyopt
 GPyOpt==1.2.5
 ```
 
-This example uses Perl regular expression to search for packages and versions in
-a Python setup file.
+`pip freeze` returns a list of installed packages to the standard output and
+`grep` searches for **gpyopt** (`-i` makes it case insensitive) in the standard
+input.
+
+**Problem:** Given an arbitrary text file, we want show only those lines
+containing a pattern specified by a *regex*.
 
 ```
 $ grep -oP "'[\w]+ == [\d.]+'" python_library/setup.py
@@ -82,11 +93,14 @@ $ grep -oP "'[\w]+ == [\d.]+'" python_library/setup.py
 'recsys_commons == 0.1.0'
 ```
 
+This example uses Perl regular expression to search for packages and versions in
+a Python setup file.
+
+
 ## cat
 
-Simply prints on the screen (standard output) the contents of files or of the
-standard input. It is very simple, but it also saves us the time of opening a
-file in an editor for a quick look.
+Simply prints on the screen (standard output) the contents of files. Simple like
+that.
 
 ```
 $ cat script.sh
@@ -99,13 +113,14 @@ echo "$BLEU"
 
 ## find
 
-Like its name suggests, it finds files by specifying many different (and
-optionally) kinds of parameters. It is also able to execute some simple actions
-or an entire command line using the resultant files.
+`find` searches for files by specifying many different (and optionally) kinds of
+parameters. It is also able to execute some simple actions or an entire command
+line using the resultant files.
 
 ### Examples
 
-Recursively find all files with **json** extension in the current directory.
+**Problem:** We want to find all files with the extension **json** in the
+current directory, including subdirectories.
 
 ```
 $ find . -name '*.json'
@@ -113,22 +128,31 @@ $ find . -name '*.json'
 ./third-party/wiwinwlh/src/26-data-formats/crew.json
 ```
 
-Find files with **pyc** extension and delete them.
+**Problem:** All files with extension **pyc** must be removed from the directory
+`my_library/modules`, recursively.
 
 ```
 $ find my_library/modules -name '*.pyc' -delete
 ```
 
-Here we tell it to search only for files with the exact name **setup.py**,
-ignoring directories (`-type f`), and executing `grep` (`-exec`) on each one of
-them.
-Note that `{}` is used to pass a file path as an argument to `grep` and
-`\;` to mark the end of the command. `grep` parameter `-H` makes it print the
-filename; play with these options to understand them.
+**Problem:** In a directory containing multiple projects, we want to find all
+`setup.py` files that contain the text `boto3` (in other words, we looking for
+projects using the library **boto3**).
+
 
 ```
 $ find . -name setup.py -type f -exec grep -Hn boto3 {} \;
 ```
+
+Here we tell it to search only for files with the exact name **setup.py**,
+ignoring directories (`-type f`) and executing `grep` (`-exec`) on each one of
+them (why don't we just use `grep` alone?)[^2].
+Note that:
+* `{}` is used to pass a file path as an argument to `grep`
+* `\;` to mark the end of the command
+* `grep` parameter `-H` makes it print the filename
+
+[^2]: Using `grep` recursively would bring all lines of all files containing `boto3`; the result can be too big to be useful.
 
 ## wc
 
@@ -137,15 +161,15 @@ standard input.
 
 ### Examples
 
-Count the number of lines in a single file.
+**Problem:** How many text lines does a file have?
 
 ```
 $ wc -l data.csv
 1024 data.csv
 ```
 
-Count the number of lines in each **csv** file and show the total number of
-lines.
+**Problem:** We want to know the total number of CSV records in a directory
+containing multiple CSV files.
 
 ```
 $ wc -l data_dir/*.csv
@@ -161,14 +185,14 @@ lines of files or the standard input.
 
 ### Examples
 
-Take only the first line of a file. This could be used to get of the header of
-a CSV file.
+**Problem:** Given a CSV file, we want to quickly look at its header.
 
 ```
 $ head -n 1 data.csv
 ```
 
-Print the last 20 lines of a log file.
+**Problem:** From a potentially huge log file, we want to read only its last
+20 events.
 
 ```
 $ tail -n 20 app.log
@@ -182,17 +206,20 @@ can be used very frequently.
 
 ### Examples
 
-Print the number of columns by analysing only the first line of a CSV file.
-First, head sends the first line to the standard output, which is consumed (as
-the standard input) by `awk` and broken up into a sequence of fields delimited
-by `,`. `NF` holds the number of fields in a line.
+**Problem:** Given a CSV file, we want to know its number of columns just by
+analysing its header.
 
 ```
 $ head -n 1 data.csv | awk -F ',' '{print NF}'
 91
 ```
 
-Print the first 10 lines (default for head) of the file's third column only.
+First, `head` sends the first line to the standard output, which is consumed (as
+the standard input) by `awk` and broken up into a sequence of fields delimited
+by `,`. `NF` holds the number of fields in a line.
+
+**Problem:** Given a big CSV file containing hundreds of columns, we want have a
+quick look at the first lines of a specific column (let's say the third column).
 
 ```
 $ head data.csv | awk -F ',' '{print $3}'
