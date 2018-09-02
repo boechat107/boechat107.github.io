@@ -16,7 +16,7 @@ development.
 {% include figure
     image_path="/images/jim-carrey-dumb-and-dumber-limo2.jpg"
     alt="dumb"
-    caption="Me after doing my first mobile app." %}
+    caption="It's me after doing my first mobile app." %}
 
 Around three years ago, I tried to play with the Android SDK and
 Java, but I found the documentation very confusing and I thought I didn't have
