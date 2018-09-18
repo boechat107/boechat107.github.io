@@ -51,7 +51,7 @@ defaults:
 author:
   name             : "Andre Boechat"
   avatar           : "/images/avatar.jpg"
-  bio              : "I help teams of software developers to design, implement and run profitable solutions."
+  bio              : "I work with teams of software developers to design, implement and run profitable solutions."
   location         : "Florianopolis, Brazil"
   email            : *aemail
   uri              : *urlsite
