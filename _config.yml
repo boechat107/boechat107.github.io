@@ -85,6 +85,7 @@ include:
 exclude:
   - Gemfile
   - README
+  - vendor/
 keep_files:
     - .git
 encoding: "utf-8"
@@ -111,6 +112,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jekyll-include-cache
   - jemoji
 
 compress_html:
