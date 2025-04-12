@@ -16,3 +16,4 @@ Thumbs.db
 help/
 *.vim
 _drafts
+.jekyll-metadata

@@ -21,7 +21,7 @@ keyboard. In another hand, images of a text can have almost infinite different
 representations in the computer, like those of the figure below.
 
 {% include figure
-    image_path="http://www.unselfishblowout.com/KillerText/images/TextExamples.jpg"
+    image_path="images/text-examples.webp"
     alt="text image"
     caption="Text can be represented by images in an almost infinity different ways." %}
 
@@ -40,7 +40,7 @@ identify the character.
 [^1]: Binary images are gray scale images with just totally black and/or totally white pixels, which are usually represented with 0s and 1s instead of 0s and 255s.
 
 {% include figure
-    image_path="http://annystudio.com/misc/anti-aliased-fonts-hurt/text-rendering-methods.gif"
+    image_path="images/text-rendering.png"
     alt="representations"
     caption="Three different representations of a letter: a binary, a gray scale and a color image." %}
 
@@ -83,7 +83,7 @@ on the second step, which is fundamental for any image that has text.
 -->
 
 {% include figure
-    image_path="http://i.stack.imgur.com/SfJ1G.png"
+    image_path="images/horizontal-projection-text.webp"
     alt="horizontal projection"
     caption="Horizontal projection of pixels with values less than a threshold." %}
 
@@ -119,7 +119,7 @@ image and the colors indicate two different categories (like two different
 letters).
 
 {% include figure
-    image_path="http://i.stack.imgur.com/SVYgd.jpg"
+    image_path="images/images-feature-space.webp"
     alt="feature spaces"
     caption="Two different feature spaces for the same image samples; the colors indicate two different categories. Low dimensional feature spaces would be some kind of summarization of the images' pixels values." %}
 
@@ -193,4 +193,3 @@ shown impressive results and promises a new range of applications for OCR.
 * Mohammed Cheriet, Nawwaf Kharma, Cheng-lin Liu, and Ching Suen. 2007. *Character Recognition Systems: A Guide for Students and Practitioners.* Wiley-Interscience.
 * Goodfellow, I., Bulatov, Y., & Ibarz, J. (2013). *Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks.* Retrieved from http://arxiv.org/abs/1312.6082
 * Jaderberg, M., Simonyan, K., Vedaldi, A., & Zisserman, A. (2014). *Synthetic Data and Artificial Neural Networks for Natural Scene Text Recognition*, 1–10. Retrieved from http://arxiv.org/abs/1406.2227v4
-

@@ -2,7 +2,7 @@
 # so be sure to set them if your theme uses them.
 title: &uname boechat107
 name: Andre Boechat
-email: &aemail boechat107@gmail.com
+email: &aemail andre.boechat@tuta.io
 description: >- # this means to ignore newlines until "baseurl:"
     Blog from Andre Boechat including notes about software and some other stuff.
 baseurl: "" # the subpath of your site, e.g. /blog
@@ -12,7 +12,7 @@ twitter_username: boechat107
 
 # Theme configuration:
 remote_theme: "mmistakes/minimal-mistakes"
-minimal_mistakes_skin: dirt
+minimal_mistakes_skin: dark
 
 # Outputting
 permalink: /:year-:month/:title/
@@ -42,7 +42,8 @@ defaults:
       toc_label: Post Contents
       author_profile: true
       read_time: true
-      comments: # true
+      show_date: true
+      # comments: true
       share: true
       related: true
 
@@ -51,7 +52,7 @@ defaults:
 author:
   name             : "Andre Boechat"
   avatar           : "/images/avatar.jpg"
-  bio              : "I work with teams of software developers to design, implement and run profitable solutions."
+  bio              : "I believe most software products could be simpler, cheaper and better documented."
   location         : "Florianopolis, Brazil"
   email            : *aemail
   uri              : *urlsite
