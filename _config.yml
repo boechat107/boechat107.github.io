@@ -19,13 +19,16 @@ permalink: /:year-:month/:title/
 paginate: 10 # amount of posts to show
 paginate_path: /page:num/
 timezone: "America/Sao_Paulo" # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#enable_copy_code_button: true
+
 
 category_archive:
   type: liquid
   path: /categories/
-# tag_archive:
-#   type: liquid
-# path: /tags/
+
+tag_archive:
+  type: liquid
+  path: /tags/
 
 words_per_minute: 100
 search: true
