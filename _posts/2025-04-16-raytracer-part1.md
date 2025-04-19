@@ -11,18 +11,17 @@ the book *The Ray Tracer Challenge* from Jamis Buck.
 
 ## Summary
 
-* *Points* and *Vectors* are simple abstractions over the same data structure:
-  *tuples*. We should be able to generalize the implementation of some
-  operations while keeping the semantic differences in their types.
+* *Points* and *Vectors* are both *tuples*, but with different meanings. We can
+  share their code while keeping their types distinct.
 
-* The term *functor* has a different meaning in OCaml than in other languages
-  like Haskell. In OCaml, *functors* are like functions from a module to another
-  module. Their syntax is similar to a module definition `module MyFunctor ...`.
+* In OCaml, *functor* means something different from Haskell. It's way to
+  create modules from other modules, like a function that takes a module and
+  returns another module. The syntax looks like `module MyFunctor ...`.
 
-* Module interfaces -- defined with `module type` -- should stay in `.ml`
-  file. I found some public libraries using the suffix `_intf.ml` to name their
-  files containing module interfaces. As a consequence, both `.ml` and `.mli`
-  files can reference the same module interface.
+* We should place module interfaces -- defined with `module type` -- in `.ml`
+  files. I found some public libraries using the suffix `_intf.ml` to name
+  their files containing module interfaces. This allows both `.ml` and
+  `.mli` files to reference the same module interface.
 
 * I should probably use the library [`Owl`](https://github.com/owlbarn/owl)
   when the performance becomes an issue.
@@ -37,8 +36,8 @@ type point = Point of float * float * float
 type vector = Vector of float * float * float
 ```
 
-The first obvious problem with these definitions is the implementation of a
-function to check if two points or two vectors are equivalent.
+One issue with these definitions is that implementing equality functions for
+points and vectors would duplicate code.
 
 ``` ocaml
 let float_eq x y =
@@ -78,8 +77,9 @@ module Vector = Make ()
 module Point = Make ()
 ```
 
-Now `Point` and `Vector` are modules instead of type constructors, and we can
-compare two points like this:
+By using *functors*, we can define `Point` and `Vector` as modules with shared
+implementation but distinct types. For example, we can compare two points using
+`Point.eq`:
 
 ``` ocaml
 Point.eq
@@ -161,4 +161,4 @@ let add_pv (p: Point.t) (v: Vector.t) =
 
 OCaml's type and module system can help us model different concepts and
 safeguard their mathematical relationships even if their low-level
-implementation are very similar -- like `Point` and `Vector`.
+implementations are very similar -- like `Point` and `Vector`.
